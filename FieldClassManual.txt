@@ -1,0 +1,10 @@
+digraph Stankfile{
+rankdir=BT;
+problem404asm404FieldClass[
+shape="record", 
+label = " {problem404asm404FieldClass |  stuff : java404lang404String \l helper : int \l left : java404util404ArrayList \l sortOf : boolean \l stuff : java404lang404String \l helper : int \l left : java404util404ArrayList \l sortOf : boolean \l sortOf : boolean \l|+ init() : void\lvoid\l}"
+];
+problem404asm404FieldClass -> "int"[arrowhead="curve", style="solid"] 
+problem404asm404FieldClass -> "java404util404ArrayList"[arrowhead="curve", style="solid"] 
+problem404asm404FieldClass -> "boolean"[arrowhead="curve", style="solid"] 
+}
