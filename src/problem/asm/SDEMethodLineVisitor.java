@@ -58,9 +58,9 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 			//System.out.println("inner add: " + this.owner.toString());
 			this.innerMethodCallNames.add(this.owner.toString());
 			//System.out.println(innerMethodCallNames.toString());
-			System.out.println("the innerMethodName to add: " + this.owner);
+			//System.out.println("the innerMethodName to add: " + this.owner);
 			this.newMethodLine.addInnerMethodName(this.owner);
-			this.newMethodLine.addInnerMethodShort(this.owner.substring(8,12));
+			this.newMethodLine.addInnerMethodShort(this.owner.substring(this.owner.length()-10,this.owner.length()-1));
 		}
 		
 	}

@@ -32,39 +32,43 @@ public class SDEDataContainer {
 		for(int i = 1; i < this.methodVisitor.methodLines.size();i++) {
 			//System.out.println("initSEQ vars: " + i + " " + this.methodVisitor.getInitSEQ().get(i).toString());
 			//System.out.println(this.methodVisitor.methodLines.get(i).getShortCutName());
+			
 			this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getShortCutName()+
 					":"+this.methodVisitor.methodLines.get(i).getReturnType());
+			
+			//System.out.println("Random crap: " + this.methodVisitor.methodLines.get(i).getMethodCaller());
+			
 			for(int j = 0; j < this.methodVisitor.methodLines.get(i).getInnerMethodShort().size();j++) {
-				String[] packageParts = this.methodVisitor.methodLines.get(j).getReturnType().split("/");
-				this.outputStream.println("/" + packageParts[packageParts.length-1]+
-					":" + this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
+//				String[] packageParts = this.methodVisitor.methodLines.get(j).getReturnType().split("/");
+//				this.outputStream.println("/" + packageParts[packageParts.length-1]+
+//					":" + this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
+				this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getInnerMethodShort().get(j) + ":" +
+						this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
 			}
-			//this.methodVisitor.shortCutName
-			//"/" + this.shortCutName + ":" + this.returnType
 		}
 		
 		outputStream.println();
 		
-		for(int j = 1; j < this.methodVisitor.getInitSEQ().size();j++) {
-			//System.out.println("initSEQ vars: " + i + " " + this.methodVisitor.getInitSEQ().get(i).toString());
-			//for(int k = 0; k < this.methodVisitor.methodLines.get(j).getInnerMethodShort().size(); k++) {
-				//this.outputStream.println("j: " + j);
-				System.out.println("outsideLoop: " + this.methodVisitor.methodLines.get(j).getReturnType());
-				this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j).getReturnType()
-					+"="+this.methodVisitor.methodLines.get(j).getShortCutName()+".new");
-			
-				//this.outputStream.println("more j: " + j);
+		for(int j = 2; j < this.methodVisitor.getInitSEQ().size();j++) {
+				this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j-1).getReturnType()
+					+"="+this.methodVisitor.methodLines.get(j-1).getShortCutName()+".new");
+				
 			for(int k = 0; k < this.methodVisitor.methodLines.get(j).getInnerMethodShort().size(); k++) {
-				System.out.println("insideLoop: " + this.methodVisitor.methodLines.get(j-1).getShortCutName());
 				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
 						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k)+".new");
+				
+				//System.out.println("raloekdkj: "+ this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
+				//		this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k)+".new");
+				
+				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":" +
+						this.methodVisitor.methodLines.get(j-1).getReturnType() + "=" + 
+						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k) + "." +
+						this.methodVisitor.methodLines.get(j-1).getMethodCaller());
 			}
 		}
 	}
 
 	private void printFields() {
-		// TODO Auto-generated method stub
-		
 		if(this.fieldVisitor.fields.size() > 1) {
 			for(int i = 0; i < this.fieldVisitor.fields.size(); i++) {
 				outputStream.print(this.fieldVisitor.fields.get(i));

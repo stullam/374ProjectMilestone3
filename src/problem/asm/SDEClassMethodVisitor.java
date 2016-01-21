@@ -64,29 +64,27 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		//methodLines.add(newMethodLine);
 		returnType = returnType.replace(".", "/");
 		
-		this.shortCutName = this.methodName.replace("create", "").substring(0, 3);
+		String methodCallerName = this.methodName + "()";
+		System.out.println("MNAS: " + methodCallerName);
+		
+		//this.shortCutName = this.methodName.replace("create", "").substring(methodName.length() - 4, methodName.length()-1);
+		this.shortCutName = this.methodName.substring(methodName.length() - 4, methodName.length()-1);
 		
 		this.newCont = new SDEMethodDataContainer();
-		if(this.shortCutName!=null) {
-			//System.out.println("shortcutname: " + this.shortCutName.toString());
-		}
-		
-//		if(newMethodLine.getLineReturnType() == null) {
-//			// do nothing
-//			newCont.setReturnType(newMethodLine.getLineReturnType());
+//		if(this.shortCutName!=null) {
+//			//System.out.println("shortcutname: " + this.shortCutName.toString());
 //		}
-//		else {
-//			newCont.setReturnType(this.returnType);
-//		}
+
 		newCont.setShortCutName(this.shortCutName);
 		//System.out.println("return typeer: " + this.returnType);
 		
 		newCont.setReturnType(this.returnType);
+		newCont.setMethodCaller(methodCallerName);
 		for(int i = 0; i < this.innerMethodNames.size(); i++) {
 			newCont.addInnerMethodName(this.innerMethodNames.get(i));
 			newCont.addInnerMethodShort(this.innerMethodShorts.get(i));
-			System.out.println("current inner method Name: " + this.innerMethodNames.get(i));
-			System.out.println("current inner method shorts: " + this.innerMethodShorts.get(i));
+			//System.out.println("current inner method Name: " + this.innerMethodNames.get(i));
+			//System.out.println("current inner method shorts: " + this.innerMethodShorts.get(i));
 		}
 		this.innerMethodNames.clear();
 		this.innerMethodShorts.clear();
@@ -99,55 +97,9 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		
 		this.initializationVariables.add(SEQInitializationSequence);
 		
-		System.out.println("SEQInitializationSequence: " + this.SEQInitializationSequence);
+		//System.out.println("SEQInitializationSequence: " + this.SEQInitializationSequence);
 		
 		toDecorate = newMethodLine;
-
-		// This block prints out all the argument types for each method
-		for(int k = 0; k < stypes.size() - 1;k++) {
-			if(argumentTypes.contains(stypes.get(k))==true){
-			}else {
-				
-//				if(stypes.get(k).contains(".")) {
-//					stypes.get(k).replace(".", "404");
-//				}
-				argumentTypes.add(stypes.get(k));
-			}
-		}
-		
-		String symbol = "";
-		if((access & Opcodes.ACC_PUBLIC) != 0) {
-			symbol = "+";
-		}if(name.contains("<") == true) {
-			name = name.replace("<", "");
-		}if(name.contains(">") == true) {
-			name = name.replace(">", "");
-		}
-		
-		if(returnTypes.contains(returnType) == false) {
-			// use the escape keys to split on like \\. instead of just the .
-			if(argumentTypes.contains(returnType) == true){
-				// do nothing
-			}else {
-//				if(returnType.contains(".")) {
-//					returnType = returnType.replace(".", "404");
-//				}
-				argumentTypes.add(returnType);
-			}
-		}
-		
-//		if(returnType.contains("[]"))
-//		{
-//			String line = symbol + " " + name + "()" + " : " + returnType;
-//			methods.add(line);
-//			for(int i=0;i<this.innerMethodShorts.size();i++)
-//			{
-//				String line = returnType + ":" + this.innerMethodShorts.get(i);
-//			}
-//			
-//		}
-		String line = symbol + " " + name + "()" + " : " + returnType;
-		methods.add(line);
 		return toDecorate;
 	}
 	
