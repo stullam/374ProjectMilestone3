@@ -1,4 +1,4 @@
-package headfirst.factory.pizzaaf;
+package pizzaaf;
 
 public abstract class Pizza {
 	String name;

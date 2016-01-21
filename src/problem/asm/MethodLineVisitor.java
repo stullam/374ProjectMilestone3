@@ -12,7 +12,7 @@ import org.objectweb.asm.Type;
 public class MethodLineVisitor extends MethodVisitor {
 
 	public MethodLineVisitor(int api, MethodVisitor cv) {
-		super(api);
+		super(api,cv);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -29,10 +29,17 @@ public class MethodLineVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desx, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desx, itf);
+		
+		System.out.println("owner: " + Type.getMethodType(owner));
+		System.out.println("name: " + Type.getMethodType(name));
+		//System.out.println("name: " + Type.getMethodType(desx));
 
-		System.out.println("owner: " + owner);
-		System.out.println("name: " + name.toString());
-		System.out.println("desx: ");
+//		Type[] argTypes = Type.getArgumentTypes(desx);
+//		//Type.get
+//		
+//		System.out.println("owner: " + owner);
+//		System.out.println("name: " + name.toString());
+//		System.out.println("desx: " + argTypes.toString());
 
 	}
 

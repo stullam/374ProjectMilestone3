@@ -42,9 +42,13 @@ public class ClassMethodVisitor extends ClassVisitor {
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		List<String> stypes = new ArrayList<String>();
 		
-		MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
+		System.out.println("visit Methods name: " + name);
+		
+		//MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
 		//methodLineVisitor.visitCode();
-		methodLineVisitor.visitMethodInsn(Opcodes.ASM5, this.name, name, desc, false);
+		toDecorate = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
+		
+		//methodLineVisitor.visitMethodInsn(Opcodes.ASM5, this.name, name, desc, false);
 		
 		//toDecorate.visitMethodInsn(arg0, arg1, arg2, arg3);
 		
@@ -88,6 +92,15 @@ public class ClassMethodVisitor extends ClassVisitor {
 		String line = symbol + " " + name + "()" + " : " + returnType;
 		methods.add(line);
 		return toDecorate;
+	}
+	
+	@Override
+	public void visitInnerClass(String name, String outerName, String innerName, int access){
+		System.out.println("visit inner: " + name);
+		System.out.println("outerName: " + outerName);
+		System.out.println("innerName: " + innerName);
+		
+		
 	}
 	
 	public ArrayList<String> getArgumentTypes() {

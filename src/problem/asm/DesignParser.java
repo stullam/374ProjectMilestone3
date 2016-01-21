@@ -48,7 +48,6 @@ public class DesignParser {
 			MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, methodVisitor);
 			
 			//MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, fieldVisitor);
-
 			reader.accept(inheritanceArrow, ClassReader.EXPAND_FRAMES);
 			reader.accept(implementsArrow, ClassReader.EXPAND_FRAMES);
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
@@ -58,13 +57,10 @@ public class DesignParser {
 			//reader.accept(sexYGoogle, ClassReader.EXPAND_FRAMES);
 			//methodLineVisitor.visitCode();
 			//reader.accept(methodLineVisitor, ClassReader.EXPAND_FRAMES);
-						
+			
 			ClassDataContainer newClassData = new ClassDataContainer(outputStream, declVisitor, fieldVisitor, methodVisitor,
 					inheritanceArrow, implementsArrow, associationArrow, usesArrow);
-			
 			classData.add(newClassData);
-			 
-
 		}
 		//System.out.println("class data size is: " + classData.size());
 		for(int k = 0; k < classData.size();k++) {

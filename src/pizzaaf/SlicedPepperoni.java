@@ -1,4 +1,4 @@
-package headfirst.factory.pizzaaf;
+package pizzaaf;
 
 public class SlicedPepperoni implements Pepperoni {
 

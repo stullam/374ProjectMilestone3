@@ -1,0 +1,14 @@
+NYP:pizzaaf.NYPizzaIngredientFactory
+/Dou:pizzaaf/Dough
+/Sau:pizzaaf/Sauce
+/Che:pizzaaf/Cheese
+/Veg:pizzaaf/Veggies[]
+/Pep:pizzaaf/Pepperoni
+/Cla:pizzaaf/Clams
+
+NYP:Dough=Dou.new
+NYP:Sauce=Sau.new
+NYP:Cheese=Che.new
+NYP:Veggies[]=Veg.new
+NYP:Pepperoni=Pep.new
+NYP:Clams=Cla.new
