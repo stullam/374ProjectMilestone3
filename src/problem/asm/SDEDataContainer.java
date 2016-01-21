@@ -34,6 +34,11 @@ public class SDEDataContainer {
 			//System.out.println(this.methodVisitor.methodLines.get(i).getShortCutName());
 			this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getShortCutName()+
 					":"+this.methodVisitor.methodLines.get(i).getReturnType());
+			for(int j = 0; j < this.methodVisitor.methodLines.get(i).getInnerMethodShort().size();j++) {
+				String[] packageParts = this.methodVisitor.methodLines.get(j).getReturnType().split("/");
+				this.outputStream.println("/" + packageParts[packageParts.length-1]+
+					":" + this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
+			}
 			//this.methodVisitor.shortCutName
 			//"/" + this.shortCutName + ":" + this.returnType
 		}
@@ -42,18 +47,19 @@ public class SDEDataContainer {
 		
 		for(int j = 1; j < this.methodVisitor.getInitSEQ().size();j++) {
 			//System.out.println("initSEQ vars: " + i + " " + this.methodVisitor.getInitSEQ().get(i).toString());
-			this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j).getReturnType().substring(8)
+			//for(int k = 0; k < this.methodVisitor.methodLines.get(j).getInnerMethodShort().size(); k++) {
+				//this.outputStream.println("j: " + j);
+				System.out.println("outsideLoop: " + this.methodVisitor.methodLines.get(j).getReturnType());
+				this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j).getReturnType()
 					+"="+this.methodVisitor.methodLines.get(j).getShortCutName()+".new");
+			
+				//this.outputStream.println("more j: " + j);
+			for(int k = 0; k < this.methodVisitor.methodLines.get(j).getInnerMethodShort().size(); k++) {
+				System.out.println("insideLoop: " + this.methodVisitor.methodLines.get(j-1).getShortCutName());
+				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
+						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k)+".new");
+			}
 		}
-		
-//		outputStream.println(declVisitor.nameGlobal + "[");
-//		outputStream.println("shape=\"record\", ");
-//		outputStream.print("label = \" {");
-//		if(declVisitor.isInterface()) {
-//			outputStream.print("\\<\\<Interface\\>\\> \\l");
-//		}
-//		outputStream.print(declVisitor.nameGlobal + " | ");
-		//printFields();
 	}
 
 	private void printFields() {

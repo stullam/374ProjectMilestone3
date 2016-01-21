@@ -1,8 +1,12 @@
 package problem.asm;
 
+import java.util.ArrayList;
+
 public class SDEMethodDataContainer {
 	public String returnType;
 	public String shortCutName;
+	public ArrayList<String> innerMethodNames = new ArrayList<String>();
+	public ArrayList<String> innerMethodShorts = new ArrayList<String>();
 	
 	public SDEMethodDataContainer() {
 		this.returnType = null;
@@ -21,5 +25,15 @@ public class SDEMethodDataContainer {
 		return this.shortCutName;
 	}
 	
-
+	public void addInnerMethodName(String s) {
+		this.innerMethodNames.add(s);
+	} public ArrayList<String> getInnerMethodName() {
+		return this.innerMethodNames;
+	} 
+	
+	public void addInnerMethodShort(String s) {
+		this.innerMethodShorts.add(s);
+	} public ArrayList<String> getInnerMethodShort() {
+		return this.innerMethodShorts;
+	}
 }

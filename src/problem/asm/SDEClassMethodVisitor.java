@@ -25,7 +25,13 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 	
 	public ArrayList<String> initializationVariables = new ArrayList<String>();
 	public String shortCutName;
+	
 	public ArrayList<SDEMethodDataContainer> methodLines = new ArrayList<SDEMethodDataContainer>();
+	
+	public ArrayList<String> innerMethodNames = new ArrayList<String>();
+	public ArrayList<String> innerMethodShorts = new ArrayList<String>();
+	
+	SDEMethodDataContainer newCont;
 
 	public SDEClassMethodVisitor(int arg0) {
 		super(arg0);
@@ -50,16 +56,42 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		//System.out.println("visit Methods name: " + name);
 		this.methodName = name;
 		
-		SDEMethodLineVisitor newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate);
+		SDEMethodLineVisitor newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate, this);
+		
+		//System.out.println("innerMethodNames: " + this.innerMethodNames.toString());
+		//System.out.println("innerMethodShorts: " + this.innerMethodShorts.toString());
+		
 		//methodLines.add(newMethodLine);
 		returnType = returnType.replace(".", "/");
 		
 		this.shortCutName = this.methodName.replace("create", "").substring(0, 3);
 		
-		SDEMethodDataContainer newCont = new SDEMethodDataContainer();
-		System.out.println("shortcutname: " + this.shortCutName);
+		this.newCont = new SDEMethodDataContainer();
+		if(this.shortCutName!=null) {
+			//System.out.println("shortcutname: " + this.shortCutName.toString());
+		}
+		
+//		if(newMethodLine.getLineReturnType() == null) {
+//			// do nothing
+//			newCont.setReturnType(newMethodLine.getLineReturnType());
+//		}
+//		else {
+//			newCont.setReturnType(this.returnType);
+//		}
 		newCont.setShortCutName(this.shortCutName);
+		//System.out.println("return typeer: " + this.returnType);
+		
 		newCont.setReturnType(this.returnType);
+		for(int i = 0; i < this.innerMethodNames.size(); i++) {
+			newCont.addInnerMethodName(this.innerMethodNames.get(i));
+			newCont.addInnerMethodShort(this.innerMethodShorts.get(i));
+			System.out.println("current inner method Name: " + this.innerMethodNames.get(i));
+			System.out.println("current inner method shorts: " + this.innerMethodShorts.get(i));
+		}
+		this.innerMethodNames.clear();
+		this.innerMethodShorts.clear();
+		
+		//newCont.setReturnType(newMethodLine.getLineReturnType());
 		methodLines.add(newCont);
 		
 		
@@ -104,6 +136,16 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 			}
 		}
 		
+//		if(returnType.contains("[]"))
+//		{
+//			String line = symbol + " " + name + "()" + " : " + returnType;
+//			methods.add(line);
+//			for(int i=0;i<this.innerMethodShorts.size();i++)
+//			{
+//				String line = returnType + ":" + this.innerMethodShorts.get(i);
+//			}
+//			
+//		}
 		String line = symbol + " " + name + "()" + " : " + returnType;
 		methods.add(line);
 		return toDecorate;
@@ -126,6 +168,17 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		outputStream.println("\"");
 		outputStream.println("];");
 		
+	}
+	
+	public void addInnerMethodName(String lk){
+		this.innerMethodNames.add(lk);
+	}
+	public void addInnerMethodShort(String lk){
+		this.innerMethodShorts.add(lk);
+	}
+	
+	public SDEMethodDataContainer getSDEMethodDataC(){
+		return this.newCont;
 	}
 
 }
