@@ -8,6 +8,7 @@ public class SDEMethodDataContainer {
 	public String methodCaller;
 	public ArrayList<String> innerMethodNames = new ArrayList<String>();
 	public ArrayList<String> innerMethodShorts = new ArrayList<String>();
+	public int methodFlag = 0;
 	
 	public SDEMethodDataContainer() {
 		this.returnType = null;
@@ -42,5 +43,17 @@ public class SDEMethodDataContainer {
 		this.methodCaller = s;
 	} public String getMethodCaller() {
 		return this.methodCaller;
+	}
+	
+	public void setMethodFlag() {
+		//doNothing
+		this.methodFlag = 1;
+	}
+	public void resetMethodFlag() {
+		this.methodFlag = 0;
+	}
+	public int getMethodFlag() {
+		//System.out.println("THe methodFlag is: " + this.methodFlag);
+		return this.methodFlag;
 	}
 }

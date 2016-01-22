@@ -57,7 +57,7 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 		
 		if(this.name.equals("<init>") && !this.owner.equals("java/lang/Object")) {
 			String nInnerMethodCall = this.supersShortCutName + ":" + this.owner;
-			//System.out.println("inner add: " + this.owner.toString());
+			System.out.println("inner add: " + this.owner.toString());
 			this.innerMethodCallNames.add(this.owner.toString());
 			//System.out.println(innerMethodCallNames.toString());
 			//System.out.println("the innerMethodName to add: " + this.owner);

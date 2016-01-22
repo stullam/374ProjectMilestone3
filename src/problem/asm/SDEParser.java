@@ -11,10 +11,11 @@ import org.objectweb.asm.Opcodes;
 public class SDEParser {
 	
 	public ArrayList<SDEDataContainer> classData = new ArrayList<SDEDataContainer>();
-	ClassDeclarationVisitor declVisitor;
-	ClassFieldVisitor fieldVisitor;
-	SDEClassMethodVisitor methodVisitor;
-	String classNameShort;
+	public ClassDeclarationVisitor declVisitor;
+	public ClassFieldVisitor fieldVisitor;
+	public SDEClassMethodVisitor methodVisitor;
+	public String classNameShort;
+	public String methodName;
 	
 	
 	public void run() throws IOException {
@@ -40,6 +41,11 @@ public class SDEParser {
 	    for(int i = 1; i < pa.length - 1; i++) {
 	    	className = className + "." + pa[i];
 	    }	    
+	    
+	    methodName = pa[pa.length-1];
+	    methodName = methodName.substring(0, methodName.length()-2);
+	    System.out.println("Method Name: " + methodName);
+	    
 	    System.out.println("Enter a depth");
 	    int a = in.nextInt();
 		
@@ -77,9 +83,9 @@ public class SDEParser {
 		ClassReader reader = new ClassReader(className);
 		System.out.println("classname: " + className);
 
-		 declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
-		 fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
-		 methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
+		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
+		fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
+		methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, methodName);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		

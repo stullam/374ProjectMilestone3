@@ -1,6 +1,7 @@
 package problem.asm;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class SDEDataContainer {
 	PrintWriter outputStream = null;
@@ -8,6 +9,7 @@ public class SDEDataContainer {
 	ClassFieldVisitor fieldVisitor = null;
 	SDEClassMethodVisitor methodVisitor= null;
 	String MainNameShort = null;
+	public ArrayList<String> compareShrtCtNames = new ArrayList<String>();
 
 	public SDEDataContainer(PrintWriter outputStreamSent, ClassDeclarationVisitor declVisitorSent,
 			ClassFieldVisitor fieldVisitorSent, SDEClassMethodVisitor methodVisitorSent) {
@@ -30,6 +32,7 @@ public class SDEDataContainer {
 
 	public void printInformation() {
 		for(int i = 1; i < this.methodVisitor.methodLines.size();i++) {
+			//if(!this.compareShrtCtNames.contains(this.methodVisitor.methodLines.get(i).getShortCutName())) {
 			this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getShortCutName()+
 					":"+this.methodVisitor.methodLines.get(i).getReturnType());
 			
@@ -40,13 +43,18 @@ public class SDEDataContainer {
 				this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getInnerMethodShort().get(j) + ":" +
 						this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
 			}
+			this.compareShrtCtNames.add(this.methodVisitor.methodLines.get(i).getShortCutName());
+			//}
 		}
 		
 		outputStream.println();
 		
 		for(int j = 2; j < this.methodVisitor.getInitSEQ().size();j++) {
+			//System.out.println("flag in printer: " + this.methodVisitor.methodLines.get(j-1).getMethodFlag());
+			if(this.methodVisitor.methodLines.get(j-1).getMethodFlag() == 1) { 
 				this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j-1).getReturnType()
 					+"="+this.methodVisitor.methodLines.get(j-1).getShortCutName()+".new");
+				
 				
 			for(int k = 0; k < this.methodVisitor.methodLines.get(j).getInnerMethodShort().size(); k++) {
 				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
@@ -56,6 +64,7 @@ public class SDEDataContainer {
 						this.methodVisitor.methodLines.get(j-1).getReturnType() + "=" + 
 						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k) + "." +
 						this.methodVisitor.methodLines.get(j-1).getMethodCaller());
+			}
 			}
 		}
 	}
