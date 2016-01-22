@@ -39,12 +39,12 @@ public class DesignParser {
 			ClassReader reader = new ClassReader(className);
 
 			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
-			ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor);
-			ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor);
+			ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor, args);
+			ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor, args);
 			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
-			ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor);
+			ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor, args);
 			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
-			ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor);
+			ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor, args);
 			MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, methodVisitor);
 			
 			//MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, fieldVisitor);
@@ -72,7 +72,7 @@ public class DesignParser {
 		outputStream.close();
 	}
 	
-	public void singleClassTester(String className) throws IOException {
+	public void singleClassTester(String className, String[] args) throws IOException {
 		//Use class decorators, add one for uses and one for association to get a better design
 		
 				PrintWriter outputStream = new PrintWriter("TESTCODE.txt");
@@ -83,13 +83,13 @@ public class DesignParser {
 					ClassReader reader = new ClassReader(className);
 
 					ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
-					ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor);
-					ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor);
+					ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor, args);
+					ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor, args);
 					ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 							declVisitor);
-					ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor);
+					ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor, args);
 					ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
-					ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor);
+					ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor, args);
 
 					reader.accept(inheritanceArrow, ClassReader.EXPAND_FRAMES);
 					reader.accept(implementsArrow, ClassReader.EXPAND_FRAMES);

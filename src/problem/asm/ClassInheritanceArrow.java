@@ -19,6 +19,8 @@ public class ClassInheritanceArrow extends ClassVisitor {
 	//public ArrayList<String> implementedNames = new ArrayList<String>();
 	private boolean isInterface;
 	private int OPS;
+	public String[] args;
+	private ArrayList<String> argumentsToDP = new ArrayList<String>();
 
 	public ClassInheritanceArrow(int arg0) {
 		super(arg0);
@@ -26,8 +28,11 @@ public class ClassInheritanceArrow extends ClassVisitor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClassInheritanceArrow(int arg0, ClassVisitor arg1) {
+	public ClassInheritanceArrow(int arg0, ClassVisitor arg1, String[] ar) {
 		super(arg0, arg1);
+		for(int i = 0; i < ar.length; i ++){
+			argumentsToDP .add(ar[i]);
+		}
 		//System.out.println("arg1: ");
 		// TODO Auto-generated constructor stub
 	}
@@ -60,7 +65,11 @@ public class ClassInheritanceArrow extends ClassVisitor {
 		if(inheritanceArrow.getNameOfExtension() != null) {
 			if(!inheritanceArrow.getNameOfExtension().equals("Object")) {
 				//System.out.println("What the declextened is: " + inheritanceArrow.getNameOfExtension());
-				outputStream.println(declVisitor.nameGlobal + " -> " + inheritanceArrow.getNameOfExtension() + "[arrowhead=\"onormal\", style=\"solid\"] ");
+				String argsContained = inheritanceArrow.getNameOfExtension().replace("404", ".");
+				if(argumentsToDP.contains(argsContained)) {
+					outputStream.println(declVisitor.nameGlobal + " -> " + inheritanceArrow.getNameOfExtension() + "[arrowhead=\"onormal\", style=\"solid\"] ");
+			
+				}
 			}
 		}
 	}

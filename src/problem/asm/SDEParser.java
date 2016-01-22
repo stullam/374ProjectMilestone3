@@ -18,11 +18,29 @@ public class SDEParser {
 		
 		int a;
 	    float b;
-	    String className;
+	    String enteredText;
+	    String className = "";
+	    String methodName;
 	    
 	    Scanner in = new Scanner(System.in);
 	    System.out.println("Enter a classname");
-	    className = in.nextLine();
+	    enteredText = in.nextLine().toString();
+	    
+	    if(enteredText.charAt(enteredText.length() - 1)!=')') {
+	    	System.out.println("You did not enter a method to be called. Please rerun me");
+	    	return;
+	    }
+	    
+	    String[] pa = enteredText.split("\\.");
+	    methodName = pa[pa.length - 1];
+	    className = pa[0];
+	    for(int i = 1; i < pa.length - 1; i++) {
+	    	className = className + "." + pa[i];
+	    }
+	    System.out.println("classname: " + className);
+	    
+	    className = className;
+	    
 	    System.out.println("Enter a depth");
 	    a = in.nextInt();
 		

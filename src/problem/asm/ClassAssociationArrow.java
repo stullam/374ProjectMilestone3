@@ -20,13 +20,18 @@ public class ClassAssociationArrow extends ClassVisitor{
 	public ArrayList<String> methods = new ArrayList<String>();
 	public ArrayList<String> returnTypes = new ArrayList<String>();
 	public ArrayList<String> argumentTypes = new ArrayList<String>();
+	public String[] args;
+	private ArrayList<String> argumentsToDP = new ArrayList<String>();
 
 	public ClassAssociationArrow(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
-	public ClassAssociationArrow(int arg0, ClassVisitor arg1) {
+	public ClassAssociationArrow(int arg0, ClassVisitor arg1, String[] ar) {
 		super(arg0, arg1);
+		for(int i = 0; i < ar.length; i ++){
+			argumentsToDP .add(ar[i]);
+		}
 	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc,
@@ -80,7 +85,11 @@ public class ClassAssociationArrow extends ClassVisitor{
 			PrintWriter outputStream) {
 		// TODO Auto-generated method stub
 		for(int i = 1; i < associationArrow.argumentTypes.size(); i++) {
+			String argsContained = associationArrow.argumentTypes.get(i).replace("404", ".");
+			if(argumentsToDP.contains(argsContained)) {
 			outputStream.println(declVisitor.nameGlobal + " -> " + "\"" +associationArrow.argumentTypes.get(i) + "\"" + "[arrowhead=\"curve\", style=\"dashed\"] ");
+		
+			}
 		}
 		
 	}
