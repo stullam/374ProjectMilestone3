@@ -15,7 +15,6 @@ public class SDEParser {
 	public ClassFieldVisitor fieldVisitor;
 	public SDEClassMethodVisitor methodVisitor;
 	public String classNameShort;
-	public String methodName;
 	
 	
 	public void run() throws IOException {
