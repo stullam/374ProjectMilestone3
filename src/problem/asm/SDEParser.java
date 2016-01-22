@@ -24,7 +24,7 @@ public class SDEParser {
 
 	    @SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
-	    System.out.println("Enter a classname");
+	    System.out.println("Enter a method");
 	    String enteredText = in.nextLine().toString();
 	    
 	    if(enteredText.charAt(enteredText.length() - 1)!=')') {
