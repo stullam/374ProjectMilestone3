@@ -25,7 +25,7 @@ public class SDEditParserTest {
 	{
 		try {
 			SDEParser myParser = new SDEParser();
-			myParser.run("problem.asm.DesignParser", 4);
+			myParser.run("java.util.Collections.shuffle()", 4);
 		} catch (IOException e) {
 			fail();
 		}
@@ -35,7 +35,7 @@ public class SDEditParserTest {
 	public void checkIfOutputIsCorrect() throws IOException
 	{
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		File file1 = new File("SDETextFile.txt");
 		System.out.println(file1.getAbsolutePath());
 		File file2 = new File("docs/SDEParserTestFile.txt");

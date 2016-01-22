@@ -20,12 +20,8 @@ public class SDEParser {
 	
 	public void run() throws IOException {
 		
-		//Use class decorators, add one for uses and one for association to get a better design
-		
+		//Use class decorators, add one for uses and one for association to get a better design	
 
-	    String className = "";
-
-	    
 	    @SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 	    System.out.println("Enter a classname");
@@ -37,7 +33,7 @@ public class SDEParser {
 	    }
 	    
 	    String[] pa = enteredText.split("\\.");
-	    className = pa[0];
+	    String className = pa[0];
 	    for(int i = 1; i < pa.length - 1; i++) {
 	    	className = className + "." + pa[i];
 	    }	    
@@ -63,10 +59,16 @@ public class SDEParser {
 		
 		//Use class decorators, add one for uses and one for association to get a better design
 		
-		int a;
-	    float b;
-	    String className = aClassName;
-	    a = aDepth;
+		String[] pa = aClassName.split("\\.");
+	    String className = pa[0];
+	    for(int i = 1; i < pa.length - 1; i++) {
+	    	className = className + "." + pa[i];
+	    }	    
+	    
+	    methodName = pa[pa.length-1];
+	    methodName = methodName.substring(0, methodName.length()-2);
+	    System.out.println("Method Name: " + methodName);
+	    int a = aDepth;
 		
 		PrintWriter outputStream = new PrintWriter("SDETextFile.txt");
 		CallForClass(className, outputStream);

@@ -14,7 +14,7 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkAccess() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals(smv.access, 0);
 
@@ -23,7 +23,7 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkReturnTypes() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals(smv.returnTypes.toString(), "[]");
 	}
@@ -31,7 +31,7 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkDesc() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals(smv.desc, null);
 	}
@@ -39,7 +39,7 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkName() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals(smv.name, "pizzaaf.NYPizzaIngredientFactory");
 	}
@@ -47,7 +47,7 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkReturnType() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals("pizzaaf/Clams", smv.returnType);
 	}
@@ -55,15 +55,15 @@ public class SDEMethodVisitor {
 	@Test
 	public void checkShortCutName() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
-		assertEquals("Cla", smv.shortCutName);
+		assertEquals("reateCla", smv.shortCutName);
 	}
 	
 	@Test
 	public void checkArgumentTypes() throws IOException {
 		SDEParser myParser = new SDEParser();
-		myParser.run("pizzaaf.NYPizzaIngredientFactory", 4);
+		myParser.run("pizzaaf.NYPizzaIngredientFactory.createDough()", 4);
 		SDEClassMethodVisitor smv = myParser.methodVisitor;
 		assertEquals("[]", smv.argumentTypes.toString());
 	}
