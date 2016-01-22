@@ -12,14 +12,16 @@ public class SDEditParserTest {
 
 	@Test(expected=IOException.class)
 	public void checkIfClassExists1() throws IOException {
-		SDEParser.run("THIS CLASS DOES NOT EXIST", 4);
+		SDEParser myParser = new SDEParser();
+		myParser.run("THIS CLASS DOES NOT EXIST", 4);
 	}
 	
 	@Test
 	public void checkIfClassExist2()
 	{
 		try {
-			SDEParser.run("problem.asm.DesignParser", 4);
+			SDEParser myParser = new SDEParser();
+			myParser.run("problem.asm.DesignParser", 4);
 		} catch (IOException e) {
 			fail();
 		}
