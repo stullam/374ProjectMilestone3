@@ -19,6 +19,7 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 	public ArrayList<String> innerReturnTypes = new ArrayList<String>();
 	
 	SDEClassMethodVisitor newMethodLine;
+	MethodVisitor decorated;
 
 	public SDEMethodLineVisitor(int api, MethodVisitor cv) {
 		super(api,cv);
@@ -39,6 +40,7 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 		// TODO Auto-generated constructor stub
 		super(asm5);
 		this.newMethodLine = sdeClassMethodVisitor;
+		this.decorated = toDecorate;
 	}
 
 	@Override

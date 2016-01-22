@@ -30,13 +30,8 @@ public class SDEDataContainer {
 
 	public void printInformation() {
 		for(int i = 1; i < this.methodVisitor.methodLines.size();i++) {
-			//System.out.println("initSEQ vars: " + i + " " + this.methodVisitor.getInitSEQ().get(i).toString());
-			//System.out.println(this.methodVisitor.methodLines.get(i).getShortCutName());
-			
 			this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getShortCutName()+
 					":"+this.methodVisitor.methodLines.get(i).getReturnType());
-			
-			//System.out.println("Random crap: " + this.methodVisitor.methodLines.get(i).getMethodCaller());
 			
 			for(int j = 0; j < this.methodVisitor.methodLines.get(i).getInnerMethodShort().size();j++) {
 //				String[] packageParts = this.methodVisitor.methodLines.get(j).getReturnType().split("/");
@@ -57,39 +52,12 @@ public class SDEDataContainer {
 				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
 						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k)+".new");
 				
-				//System.out.println("raloekdkj: "+ this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":"+
-				//		this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k)+".new");
-				
 				this.outputStream.println(this.methodVisitor.methodLines.get(j-1).getShortCutName() + ":" +
 						this.methodVisitor.methodLines.get(j-1).getReturnType() + "=" + 
 						this.methodVisitor.methodLines.get(j).getInnerMethodShort().get(k) + "." +
 						this.methodVisitor.methodLines.get(j-1).getMethodCaller());
 			}
 		}
-	}
-
-	private void printFields() {
-		if(this.fieldVisitor.fields.size() > 1) {
-			for(int i = 0; i < this.fieldVisitor.fields.size(); i++) {
-				outputStream.print(this.fieldVisitor.fields.get(i));
-			}
-			this.outputStream.print(this.fieldVisitor.fields.get(this.fieldVisitor.fields.size()-1) + "|");
-		}
-		printMethods();
-	}
-
-	private void printMethods() {
-		// TODO Auto-generated method stub
-		//methodVisitor.printMethods(methodVisitor, outputStream);
-		printConnections();
-	}
-
-	private void printConnections() {
-		// TODO Auto-generated method stub
-		//inheritanceArrow.printConnections(inheritanceArrow, declVisitor, outputStream);
-		//implementsArrow.printConnections(implementsArrow, declVisitor, outputStream);
-		//associationArrow.printConnections(associationArrow, declVisitor, outputStream);
-		//usesArrow.printConnections(usesArrow, declVisitor, outputStream);
 	}
 
 }

@@ -21,10 +21,10 @@ public class SDEClassDeclarationVisitor extends ClassVisitor {
 	
 	int version;
 	//int access;
-	String name;
+	public String name;
 	//String signature; 
-	String superName;
-	String[] interfaces;
+	public String superName;
+	public String[] interfaces;
 
 	public SDEClassDeclarationVisitor(int arg0) {
 		super(arg0);

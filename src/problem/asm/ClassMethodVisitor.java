@@ -112,7 +112,12 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i = 0; i < methodVisitor.methods.size(); i++) {
 			outputStream.print("" + methodVisitor.methods.get(i) + "" + "\\l");
 		}
-		outputStream.print(methodVisitor.getArgumentTypes().get(methodVisitor.getArgumentTypes().size() -1) + "\\l}");
+		if(methodVisitor.getArgumentTypes().size() != 0) {
+			outputStream.print(methodVisitor.getArgumentTypes().get(methodVisitor.getArgumentTypes().size() -1) + "\\l}");
+		}
+		else {
+			outputStream.print("\\l}");
+		}
 		outputStream.println("\"");
 		outputStream.println("];");
 		

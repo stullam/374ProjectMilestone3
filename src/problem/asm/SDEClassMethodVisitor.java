@@ -22,15 +22,11 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 	private String methodName;
 	private String SEQInitializationSequence;
 	public String returnType;
-	
 	public ArrayList<String> initializationVariables = new ArrayList<String>();
 	public String shortCutName;
-	
 	public ArrayList<SDEMethodDataContainer> methodLines = new ArrayList<SDEMethodDataContainer>();
-	
 	public ArrayList<String> innerMethodNames = new ArrayList<String>();
 	public ArrayList<String> innerMethodShorts = new ArrayList<String>();
-	
 	SDEMethodDataContainer newCont;
 
 	public SDEClassMethodVisitor(int arg0) {
@@ -68,7 +64,9 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		System.out.println("MNAS: " + methodCallerName);
 		
 		//this.shortCutName = this.methodName.replace("create", "").substring(methodName.length() - 4, methodName.length()-1);
-		this.shortCutName = this.methodName.substring(methodName.length() - 4, methodName.length()-1);
+		if(this.methodName.length() > 4) {
+			this.shortCutName = this.methodName.substring(methodName.length() - 4, methodName.length()-1);
+		}
 		
 		this.newCont = new SDEMethodDataContainer();
 //		if(this.shortCutName!=null) {
