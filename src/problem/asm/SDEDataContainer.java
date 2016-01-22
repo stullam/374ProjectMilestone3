@@ -4,13 +4,13 @@ import java.io.PrintWriter;
 
 public class SDEDataContainer {
 	PrintWriter outputStream = null;
-	SDEClassDeclarationVisitor declVisitor = null;
-	SDEClassFieldVisitor fieldVisitor = null;
+	ClassDeclarationVisitor declVisitor = null;
+	ClassFieldVisitor fieldVisitor = null;
 	SDEClassMethodVisitor methodVisitor= null;
 	String MainNameShort = null;
 
-	public SDEDataContainer(PrintWriter outputStreamSent, SDEClassDeclarationVisitor declVisitorSent,
-			SDEClassFieldVisitor fieldVisitorSent, SDEClassMethodVisitor methodVisitorSent) {
+	public SDEDataContainer(PrintWriter outputStreamSent, ClassDeclarationVisitor declVisitorSent,
+			ClassFieldVisitor fieldVisitorSent, SDEClassMethodVisitor methodVisitorSent) {
 		// TODO Auto-generated constructor stub
 		this.outputStream = outputStreamSent;
 		this.declVisitor = declVisitorSent;
@@ -18,8 +18,8 @@ public class SDEDataContainer {
 		this.methodVisitor = methodVisitorSent;
 	}
 	
-	public SDEDataContainer(PrintWriter outputStream2, SDEClassDeclarationVisitor declVisitor2,
-			SDEClassFieldVisitor fieldVisitor2, SDEClassMethodVisitor methodVisitor2, String classNameShort) {
+	public SDEDataContainer(PrintWriter outputStream2, ClassDeclarationVisitor declVisitor2,
+			ClassFieldVisitor fieldVisitor2, SDEClassMethodVisitor methodVisitor2, String classNameShort) {
 		// TODO Auto-generated constructor stub
 		this.outputStream = outputStream2;
 		this.declVisitor = declVisitor2;

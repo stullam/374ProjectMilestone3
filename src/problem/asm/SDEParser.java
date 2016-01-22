@@ -61,14 +61,14 @@ public class SDEParser {
 		ClassReader reader = new ClassReader(className);
 		System.out.println("classname: " + className);
 
-		SDEClassDeclarationVisitor declVisitor = new SDEClassDeclarationVisitor(Opcodes.ASM5,className);
-		SDEClassFieldVisitor fieldVisitor = new SDEClassFieldVisitor(Opcodes.ASM5, declVisitor);
+		ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
+		ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
 		SDEClassMethodVisitor methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		
 		String classNameShort = declVisitor.nameGlobal.substring(declVisitor.nameGlobal.length()-6,declVisitor.nameGlobal.length()-2);
-		outputStream.println(classNameShort + ":" + declVisitor.nameGlobal);
+		outputStream.println(classNameShort + ":" + declVisitor.nameGlobal.replace("404", "."));
 		SDEDataContainer newClassData = new SDEDataContainer(outputStream, declVisitor, fieldVisitor, methodVisitor, classNameShort);
 		classData.add(newClassData);
 	}
