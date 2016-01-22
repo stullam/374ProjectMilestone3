@@ -11,10 +11,10 @@ import org.objectweb.asm.Opcodes;
 public class SDEParser {
 	
 	public ArrayList<SDEDataContainer> classData = new ArrayList<SDEDataContainer>();
-	ClassDeclarationVisitor declVisitor;
-	ClassFieldVisitor fieldVisitor;
-	SDEClassMethodVisitor methodVisitor;
-	String classNameShort;
+	public ClassDeclarationVisitor declVisitor;
+	public ClassFieldVisitor fieldVisitor;
+	public SDEClassMethodVisitor methodVisitor;
+	public String classNameShort;
 	
 	
 	public void run() throws IOException {
