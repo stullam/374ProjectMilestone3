@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -20,6 +22,12 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 	
 	SDEClassMethodVisitor newMethodLine;
 	MethodVisitor decorated;
+	
+	public SDEC globalContainer;
+	public String callerShortName;
+	public ClassVisitor locFieldV;
+	public ClassReader reader;
+	public int DEPTH;
 
 	public SDEMethodLineVisitor(int api, MethodVisitor cv) {
 		super(api,cv);
@@ -36,11 +44,18 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 		super(asm5);
 	}
 
-	public SDEMethodLineVisitor(int asm5, MethodVisitor toDecorate, SDEClassMethodVisitor sdeClassMethodVisitor) {
+	public SDEMethodLineVisitor(int asm5, MethodVisitor toDecorate, SDEClassMethodVisitor sdeClassMethodVisitor, 
+			SDEC globalContainer, String returnTNameShort, ClassVisitor locFieldV, ClassReader reader, int i) {
 		// TODO Auto-generated constructor stub
 		super(asm5);
 		this.newMethodLine = sdeClassMethodVisitor;
 		this.decorated = toDecorate;
+		this.globalContainer = globalContainer;
+		this.callerShortName = returnTNameShort;
+		this.locFieldV = locFieldV;
+		this.reader = reader;
+		this.DEPTH = i;
+		System.out.println("Im hitting here again up top way up high");
 	}
 
 	@Override
@@ -50,35 +65,31 @@ public class SDEMethodLineVisitor extends MethodVisitor {
 		this.owner = owner;
 		this.name = name;
 		
-		//System.out.println("SDE owner: " + Type.getMethodType(owner));
-		//System.out.println("SDE name: " + Type.getMethodType(name));
+		String OWNER = Type.getMethodType(owner).toString();
+		String ownerToClass = OWNER.replaceAll("/", ".");
 		
+		System.out.println("SDE owner: " + Type.getMethodType(owner)); 
+		System.out.println("SDE name: " + Type.getMethodType(name));		
+		System.out.println("caller sn: " + this.callerShortName);
+		
+		String ownerNShort = Type.getMethodType(owner).toString().substring(0, Type.getMethodType(owner).toString().length()-2);
+		
+		ownerToClass = ownerToClass.replace(".", "/");
+		globalContainer.addInitializers("/" + ownerNShort + ":" + ownerToClass);
+		globalContainer.addCalls(this.callerShortName + ":" + ownerNShort + ".new");
+		globalContainer.addCalls(this.callerShortName + ":" + ownerToClass + "=" + ownerNShort + ".method()");
+
 		setLineReturnType(owner);
 		
 		if(this.name.equals("<init>") && !this.owner.equals("java/lang/Object")) {
+			
 			String nInnerMethodCall = this.supersShortCutName + ":" + this.owner;
-			System.out.println("inner add: " + this.owner.toString());
 			this.innerMethodCallNames.add(this.owner.toString());
-			//System.out.println(innerMethodCallNames.toString());
-			//System.out.println("the innerMethodName to add: " + this.owner);
 			this.newMethodLine.addInnerMethodName(this.owner);
 			this.newMethodLine.addInnerMethodShort(this.owner.substring(this.owner.length()-10,this.owner.length()-1));
 		}
 		
 	}
-//	private void SDEMethodLineRevisitor(String replace) throws IOException {
-//		// TODO Auto-generated method stub
-//		System.out.println("THis got recalled");
-//		ClassReader reader = new ClassReader(replace);
-//
-//		SDEClassDeclarationVisitor declVisitor = new SDEClassDeclarationVisitor(Opcodes.ASM5, replace);
-//		SDEClassFieldVisitor fieldVisitor = new SDEClassFieldVisitor(Opcodes.ASM5, declVisitor);
-//		SDEClassMethodVisitor methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, replace);
-//
-//		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-//		
-//		String classNameShort = declVisitor.nameGlobal.substring(8,11);
-//	}
 
 	public String getLineReturnType() {
 		return this.lineReturnType;

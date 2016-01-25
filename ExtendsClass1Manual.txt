@@ -1,0 +1,8 @@
+digraph Stankfile{
+rankdir=BT;
+problem404asm404ExtendsClass[
+shape="record", 
+label = " {problem404asm404ExtendsClass | + init() : void\lvoid\l}"
+];
+problem404asm404ExtendsClass -> org404objectweb404asm404ClassVisitor[arrowhead="onormal", style="solid"] 
+}

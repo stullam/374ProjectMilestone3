@@ -28,6 +28,10 @@ public class DesignParser {
 
 	public static void main(String[] args) throws IOException {
 		
+		// something is a singleton if it has a method that returns itself
+		// will also have a field of itself
+		// private constructor
+		
 		//Use class decorators, add one for uses and one for association to get a better design
 		
 		PrintWriter outputStream = new PrintWriter("ManualAssociationFromImplementationClass.txt");
@@ -68,7 +72,7 @@ public class DesignParser {
 		}
 		
 		outputStream.println("}");
-		System.out.println("Your file has been converted!");
+		//System.out.println("Your file has been converted!");
 		outputStream.close();
 	}
 	
@@ -108,7 +112,7 @@ public class DesignParser {
 				}
 				
 				outputStream.println("}");
-				System.out.println("Your file has been converted!");
+				//System.out.println("Your file has been converted!");
 				outputStream.close();
 	}
 

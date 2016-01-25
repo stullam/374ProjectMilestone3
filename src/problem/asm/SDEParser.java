@@ -17,6 +17,11 @@ public class SDEParser {
 	public String classNameShort;
 	public String methodName;
 	
+	public String callerShortName;
+	public SDEC globalContainer;
+	
+	public int DEPTH;
+	
 	
 	public void run() throws IOException {
 		
@@ -44,13 +49,21 @@ public class SDEParser {
 	    
 	    System.out.println("Enter a depth");
 	    int a = in.nextInt();
+	    
+	    this.DEPTH = a;
 		
 		PrintWriter outputStream = new PrintWriter("SDETextFile.txt");
+		
+		this.globalContainer = new SDEC();
+		this.callerShortName = className.substring(0, className.length() - 2);
+		globalContainer.addInitializers(this.callerShortName + ":" + className);
 		CallForClass(className, outputStream);
 
-		for(int k = 0; k < classData.size();k++) {
-			classData.get(k).printInformation();
-		}
+//		for(int k = 0; k < classData.size();k++) {
+//			classData.get(k).printInformation();
+//		}
+		
+		globalContainer.printInfo(outputStream);
 
 		outputStream.close();
 	}
@@ -69,14 +82,20 @@ public class SDEParser {
 	    methodName = methodName.substring(0, methodName.length()-2);
 	    System.out.println("Method Name: " + methodName);
 	    int a = aDepth;
+	    this.DEPTH = a;
 		
-		PrintWriter outputStream = new PrintWriter("SDETextFile.txt");
+		PrintWriter outputStream = new PrintWriter("SDETextFile2323.txt");
+		this.globalContainer = new SDEC();
+		this.callerShortName = className.substring(0, className.length() - 2);
+		globalContainer.addInitializers(this.callerShortName + ":" + className);
 		CallForClass(className, outputStream);
 		
 
-		for(int k = 0; k < classData.size();k++) {
-			classData.get(k).printInformation();
-		}
+//		for(int k = 0; k < classData.size();k++) {
+//			classData.get(k).printInformation();
+//		}
+		
+		globalContainer.printInfo(outputStream);
 
 		outputStream.close();
 	}
@@ -87,12 +106,13 @@ public class SDEParser {
 
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
 		fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
-		methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, methodName);
+		methodVisitor = new SDEClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, 
+				methodName, globalContainer, callerShortName, reader, this.DEPTH);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		
 		classNameShort = declVisitor.nameGlobal.substring(declVisitor.nameGlobal.length()-6,declVisitor.nameGlobal.length()-2);
-		outputStream.println(classNameShort + ":" + declVisitor.nameGlobal.replace("404", "."));
+		//outputStream.println(classNameShort + ":" + declVisitor.nameGlobal.replace("404", "."));
 		SDEDataContainer newClassData = new SDEDataContainer(outputStream, declVisitor, fieldVisitor, methodVisitor, classNameShort);
 		classData.add(newClassData);
 	}

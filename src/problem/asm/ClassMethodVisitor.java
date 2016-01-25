@@ -20,15 +20,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ArrayList<String> methods = new ArrayList<String>();
 	public ArrayList<String> returnTypes = new ArrayList<String>();
 	public ArrayList<String> argumentTypes = new ArrayList<String>();
+	private boolean singletonInMethod = false;
+	private ClassFieldVisitor fVisitor;
 
 	public ClassMethodVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1,String ClassName) {
-		super(arg0, arg1);
+	public ClassMethodVisitor(int arg0, ClassFieldVisitor fieldVisitor,String ClassName) {
+		super(arg0, fieldVisitor);
 		this.name = ClassName;
+		this.fVisitor = fieldVisitor;
 	}
 	
 	@Override
@@ -36,31 +39,17 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		//MethodVisitor additional = super.visitMethodInsn(Opcodes.ASM5, this.name, name, desc, false);
-		//toDecorate.visitMethodInsn(Opcodes.ASM5, this.name, name, desc, false);
 		String returnType = Type.getReturnType(desc).getClassName();
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		List<String> stypes = new ArrayList<String>();
 		
-		System.out.println("visit Methods name: " + name);
-		
-		//MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
-		//methodLineVisitor.visitCode();
+		//System.out.println("visit Methods name: " + name);
 		toDecorate = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
-		
-		//methodLineVisitor.visitMethodInsn(Opcodes.ASM5, this.name, name, desc, false);
-		
-		//toDecorate.visitMethodInsn(arg0, arg1, arg2, arg3);
-		
-		//MethodVisitor stuff = this.visitMethod(access, name, desc, signature, exceptions);
-		
-		//ClassMethodVisitor secondaryVisitor = new ClassMethodVisitor(Opcodes.ASM5, this);
 
 		// This block prints out all the argument types for each method
 		for(int k = 0; k < stypes.size() - 1;k++) {
 			if(argumentTypes.contains(stypes.get(k))==true){
 			}else {
-				
 				if(stypes.get(k).contains(".")) {
 					stypes.get(k).replace(".", "404");
 				}
@@ -78,12 +67,16 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 		
 		if(returnTypes.contains(returnType) == false) {
-			// use the escape keys to split on like \\. instead of just the .
 			if(argumentTypes.contains(returnType) == true){
-				// do nothing
 			}else {
 				if(returnType.contains(".")) {
 					returnType = returnType.replace(".", "404");
+					System.out.println("the return type is: " + returnType);
+					if(returnType.equals(this.fVisitor.getGlobalClassName())) {
+						setSingletonInMethod(true);
+						System.out.println("something in method");
+					}
+					//if(returnType.equals(this.dec))
 				}
 				argumentTypes.add(returnType);
 			}
@@ -96,9 +89,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 	
 	@Override
 	public void visitInnerClass(String name, String outerName, String innerName, int access){
-		System.out.println("visit inner: " + name);
-		System.out.println("outerName: " + outerName);
-		System.out.println("innerName: " + innerName);
+		//System.out.println("visit inner: " + name);
+		//System.out.println("outerName: " + outerName);
+		//System.out.println("innerName: " + innerName);
 		
 		
 	}
@@ -119,8 +112,19 @@ public class ClassMethodVisitor extends ClassVisitor {
 			outputStream.print("\\l}");
 		}
 		outputStream.println("\"");
+		
+		if(getSingletonInMethod() || fVisitor.getSingletonInField()) {
+			outputStream.print("color = blue");
+		}
+		
 		outputStream.println("];");
 		
+	}
+	public void setSingletonInMethod(boolean val) {
+		this.singletonInMethod = val;
+	}
+	public boolean getSingletonInMethod() {
+		return this.singletonInMethod;
 	}
 
 }

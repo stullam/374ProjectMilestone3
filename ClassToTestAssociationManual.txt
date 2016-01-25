@@ -1,0 +1,7 @@
+digraph Stankfile{
+rankdir=BT;
+problem404asm404ClassToTestAssociation[
+shape="record", 
+label = " {problem404asm404ClassToTestAssociation | + init() : void\lvoid\l}"
+];
+}

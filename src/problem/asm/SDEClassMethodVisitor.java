@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -29,16 +31,28 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 	public ArrayList<String> innerMethodShorts = new ArrayList<String>();
 	SDEMethodDataContainer newCont;
 	public String targetMethodName;
+	
+	public SDEC globalContainer;
+	public String callerShortName;
+	public ClassVisitor locFieldV;
+	public ClassReader reader;
+	public int DEPTH;
 
 	public SDEClassMethodVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
-	public SDEClassMethodVisitor(int arg0, ClassVisitor arg1,String ClassName, String MethodName) {
+	public SDEClassMethodVisitor(int arg0, ClassVisitor arg1,String ClassName, String MethodName, 
+			SDEC globalContainer, String callerShortName, ClassReader reader, int dEPTH) {
 		super(arg0, arg1);
 		this.name = ClassName;
 		this.targetMethodName = MethodName;
+		this.globalContainer = globalContainer;
+		this.callerShortName = callerShortName;
+		this.locFieldV = arg1;
+		this.reader = reader;
+		this.DEPTH = dEPTH;
 	}
 	
 	@Override
@@ -55,16 +69,15 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		}
 		List<String> stypes = new ArrayList<String>();
 		
-		//System.out.println("visit Methods name: " + name);
-		this.methodName = name;
-		
-		//SDEMethodLineVisitor newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate, this);
-		
-		//System.out.println("innerMethodNames: " + this.innerMethodNames.toString());
-		//System.out.println("innerMethodShorts: " + this.innerMethodShorts.toString());
-		
-		//methodLines.add(newMethodLine);
 		returnType = returnType.replace(".", "/");
+		
+		//System.out.println("visit Methods name: " + name);
+		//System.out.println("visit Methods return type: " + this.returnType);
+		String returnTNameShort = this.returnType.substring(0, this.returnType.length() - 2);
+		globalContainer.addInitializers("/" + returnTNameShort + ":" + this.returnType);
+		globalContainer.addCalls(this.callerShortName + ":" + this.returnType + "=" + returnTNameShort + ".new");
+		
+		this.methodName = name;		
 		
 		String methodCallerName;
 		if(argTypes.length > 0) {
@@ -83,37 +96,27 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 				}
 			}
 			if(argTypes.length == 2) {
-				//methodCallerName = methodCallerName.substring(0, methodCallerName.length() - 1);
 			}
 			methodCallerName = methodCallerName + ")";
 		}
 		else {
 			methodCallerName = this.methodName + "()";
 		}
+		globalContainer.addCalls(this.callerShortName + ":" + this.returnType + "=" + returnTNameShort + "." + methodCallerName);
 		
 		SDEMethodLineVisitor newMethodLine = null;
-		System.out.println("MNAS: " + methodCallerName);
-		System.out.println("compName : " + methodCallerName.substring(0,methodCallerName.indexOf("(")));
 		if(targetMethodName.equals(methodCallerName.substring(0,methodCallerName.indexOf("(")))) {
 			System.out.println("it has been found to be true");
-			newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate, this);
+			newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate, this, 
+					globalContainer, returnTNameShort, this.locFieldV, this.reader, this.DEPTH-1);
 		}
-		//SDEMethodLineVisitor newMethodLine = new SDEMethodLineVisitor(Opcodes.ASM5, toDecorate, this);
-		
-		
-		//this.shortCutName = this.methodName.replace("create", "").substring(methodName.length() - 4, methodName.length()-1);
 		if(this.methodName.length() > 4) {
 			this.shortCutName = this.methodName.substring(1, methodName.length()-1);
 		}
 		
 		this.newCont = new SDEMethodDataContainer();
-//		if(this.shortCutName!=null) {
-//			//System.out.println("shortcutname: " + this.shortCutName.toString());
-//		}
 
 		newCont.setShortCutName(this.shortCutName);
-		//System.out.println("return typeer: " + this.returnType);
-		
 		newCont.setReturnType(this.returnType);
 		newCont.setMethodCaller(methodCallerName);
 		
@@ -125,24 +128,14 @@ public class SDEClassMethodVisitor extends ClassVisitor {
 		for(int i = 0; i < this.innerMethodNames.size(); i++) {
 			newCont.addInnerMethodName(this.innerMethodNames.get(i));
 			newCont.addInnerMethodShort(this.innerMethodShorts.get(i));
-			//System.out.println("current inner method Name: " + this.innerMethodNames.get(i));
-			//System.out.println("current inner method shorts: " + this.innerMethodShorts.get(i));
 		}
 		this.innerMethodNames.clear();
 		this.innerMethodShorts.clear();
 		
-		//newCont.setReturnType(newMethodLine.getLineReturnType());
-		
-		
 		methodLines.add(newCont);
 		
-		
-		
 		this.SEQInitializationSequence = "/" + this.shortCutName + ":" + this.returnType;
-		
 		this.initializationVariables.add(SEQInitializationSequence);
-		
-		//System.out.println("SEQInitializationSequence: " + this.SEQInitializationSequence);
 		
 		if(newMethodLine != null) {
 			toDecorate = newMethodLine;

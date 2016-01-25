@@ -1,13 +1,11 @@
 package problem.asm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 
-public class ClassDeclarationVisitor extends ClassVisitor {
+public class SDEClassDeclarationVisitor extends ClassVisitor {
 	
 	public int access;
 	public String nameGlobal;
@@ -20,34 +18,35 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	//public ArrayList<String> implementedNames = new ArrayList<String>();
 	private boolean isInterface;
 	private int OPS;
-	private boolean isSingleton;
-	public String className;
 	
 	int version;
 	//int access;
-	String name;
+	public String name;
 	//String signature; 
-	String superName;
-	String[] interfaces;
+	public String superName;
+	public String[] interfaces;
 
-	public ClassDeclarationVisitor(int arg0) {
+	public SDEClassDeclarationVisitor(int arg0) {
 		super(arg0);
-		this.isSingleton = false;
+		//System.out.println(this.getClass().getName());
+		// TODO Auto-generated constructor stub
 	}
 
-	public ClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
+	public SDEClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
-		this.isSingleton = false;
+		//System.out.println("arg1: ");
+		// TODO Auto-generated constructor stub
 	}
 	
-	public ClassDeclarationVisitor(int asm5, String className) {
+	public SDEClassDeclarationVisitor(int asm5, String className) {
+		// TODO Auto-generated constructor stub
+		// This is new stuff that might need to be deleted
 		super(asm5);
-		className = className.replace(".", "404");
+		//className = className.replace(".", "404");
+		//System.out.println("This might be object: " + className);
+		//className = "\\"" + className + "\\"";
 		this.nameGlobal = className;
 		this.OPS = asm5;
-		this.isSingleton = false;
-		//System.out.println("className when stuff happens: " + className);
-		this.className = className;
 	}
 
 	@Override
@@ -61,24 +60,38 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.superName = superName;
 		this.interfaces = interfaces;
 		
+		//System.out.println("this: ");
+		
 		if((access&Opcodes.ACC_INTERFACE)!=0){
             this.isInterface = true;
+            //System.out.println("Im getting here");
+            //System.out.println("Classname of interface: " + this.nameGlobal);
         }
 		
+		//System.out.println("Super Name of Extender: " + superName);
+		//String[] extender = superName.split("/");
+		//this.extendNameGlobal = extender[extender.length - 1];
+		
 		if(superName !=null) {
-			this.extendNameGlobal = superName.replace("/", "404");
+			//this.extendNameGlobal = superName.replace("/", "404");
+			this.extendNameGlobal = superName;
 		}
+		//System.out.println("Extended Name: " + this.extendNameGlobal);
 
 		for(int i = 0; i < interfaces.length; i++) {
-			this.implementerNameGlobal = interfaces[i].replace("/", "404");
+			//this.implementerNameGlobal = interfaces[i].replace("/", "404");
+			this.implementerNameGlobal = interfaces[i];
 			if(!this.implementerNameGlobal.equals("null")) {
 				implementers.add(this.implementerNameGlobal);
 			}
+
 		}
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 
 	public int getImplementedNameList() {
+		// TODO Auto-generated method stub
+		//System.out.println("ImplementerSize" + implementers.size());
 		return implementers.size();
 	}
 	public ArrayList<String> getImplementedItems() {
@@ -86,15 +99,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	}
 	public boolean isInterface() {
 		return this.isInterface;
-	}
-	public boolean isSingleton() {
-		return this.isSingleton;
-	}
-	public void setSingleton(boolean val) {
-		this.isSingleton = val;
-	}
-	public String getGlobalClassname() {
-		return this.className;
 	}
 
 }

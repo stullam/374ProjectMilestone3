@@ -15,9 +15,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 	public String signature;
 	public String symbol = "";
 	public String type;
+	public boolean singletonInField = false;
 	public String[] exceptions;
+	public String globalClassName = "";
 	public ArrayList<String> fields = new ArrayList<String>();
 	public ArrayList<String> fieldTypes = new ArrayList<String>();
+	public ClassDeclarationVisitor classDeclaration;
 
 
 	public ClassFieldVisitor(int arg0) {
@@ -25,9 +28,11 @@ public class ClassFieldVisitor extends ClassVisitor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
+	public ClassFieldVisitor(int arg0, ClassDeclarationVisitor arg1) {
 		super(arg0, arg1);
 		// TODO Auto-generated constructor stub
+		this.classDeclaration = arg1;
+		setGlobalClassName();
 	}
 	
 	public FieldVisitor visitField(int access, String name, String desc, 
@@ -52,6 +57,14 @@ public class ClassFieldVisitor extends ClassVisitor {
 			symbol = "+";
 		}
 		
+		//System.out.println("access: " + access);
+		//System.out.println("fieldname: " + name);
+		//System.out.println("type: " + type);
+		if(type.equals(this.classDeclaration.getGlobalClassname())) {
+			setSingletonInField(true);
+			System.out.println("something in field");
+		}
+		
 		String line = symbol + " " + name + " : " + type + " \\l";
 		fields.add(line);
 		
@@ -65,5 +78,17 @@ public class ClassFieldVisitor extends ClassVisitor {
 	public ArrayList<String> getFieldTypes() {
 		return this.fieldTypes;
 	}
-
+	public void setSingletonInField(boolean val) {
+		this.singletonInField = val;
+	}
+	public boolean getSingletonInField() {
+		return this.singletonInField;
+	}
+	public void setGlobalClassName() {
+		this.globalClassName = this.classDeclaration.getGlobalClassname();
+		//System.out.println("field globalClassname: " + this.classDeclaration.getGlobalClassname());
+	}
+	public String getGlobalClassName() {
+		return this.globalClassName;
+	}
 }

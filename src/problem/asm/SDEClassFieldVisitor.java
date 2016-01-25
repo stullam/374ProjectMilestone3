@@ -1,16 +1,13 @@
 package problem.asm;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-public class ClassUsesArrow extends ClassVisitor {
+public class SDEClassFieldVisitor extends ClassVisitor {
 	
 	public int access;
 	public String name;
@@ -21,34 +18,29 @@ public class ClassUsesArrow extends ClassVisitor {
 	public String[] exceptions;
 	public ArrayList<String> fields = new ArrayList<String>();
 	public ArrayList<String> fieldTypes = new ArrayList<String>();
-	public String[] args;
-	public ArrayList<String> argumentsToDP = new ArrayList<String>();
-	
-	public ClassUsesArrow(int arg0) {
+
+
+	public SDEClassFieldVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public ClassUsesArrow(int arg0, ClassVisitor arg1, String[] ar) {
-		super(arg0, arg1);
-		for(int i = 0; i < ar.length; i ++){
-			argumentsToDP.add(ar[i]);
-		}
-	}
 
+	public SDEClassFieldVisitor(int arg0, ClassVisitor arg1) {
+		super(arg0, arg1);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public FieldVisitor visitField(int access, String name, String desc, 
 			String signature, Object value) {
-		
-		//System.out.println("I am never getting here");
 
 		FieldVisitor toDecorate = super.visitField(access, name, 
 				desc, signature, value);
 
 		type = Type.getType(desc).getClassName();
 		
-		if(type.contains(".")) {
-			type = type.replace(".", "404");
-		}
+//		if(type.contains(".")) {
+//			type = type.replace(".", "404");
+//		}
 		
 		if(fieldTypes.contains(type)==true){
 			// do nothing
@@ -63,25 +55,15 @@ public class ClassUsesArrow extends ClassVisitor {
 		String line = symbol + " " + name + " : " + type + " \\l";
 		fields.add(line);
 		
+		//System.out.println("field stuff: " + name.toString());
+		
 		return toDecorate;
 	}
-	public ArrayList<String> getFields() {
+	public ArrayList<String> getPrintableLine() {
 		return this.fields;
 	}
 	public ArrayList<String> getFieldTypes() {
 		return this.fieldTypes;
 	}
 
-	public void printConnections(ClassUsesArrow usesArrow, ClassDeclarationVisitor declVisitor,
-			PrintWriter outputStream) {
-		// TODO Auto-generated method stub
-		for(int i = 1; i < usesArrow.getFieldTypes().size();i++){
-			String argsContained = usesArrow.getFieldTypes().get(i).replace("404", ".");
-			if(argumentsToDP.contains(argsContained)) {
-				outputStream.println(declVisitor.nameGlobal + " -> " + "\"" + usesArrow.getFieldTypes().get(i) + "\"" + "[arrowhead=\"curve\", style=\"solid\"] ");
-			//for the uses stuff
-			}
-		}
-		
-	}
 }

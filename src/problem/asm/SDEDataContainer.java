@@ -32,14 +32,10 @@ public class SDEDataContainer {
 
 	public void printInformation() {
 		for(int i = 1; i < this.methodVisitor.methodLines.size();i++) {
-			//if(!this.compareShrtCtNames.contains(this.methodVisitor.methodLines.get(i).getShortCutName())) {
 			this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getShortCutName()+
 					":"+this.methodVisitor.methodLines.get(i).getReturnType());
 			
 			for(int j = 0; j < this.methodVisitor.methodLines.get(i).getInnerMethodShort().size();j++) {
-//				String[] packageParts = this.methodVisitor.methodLines.get(j).getReturnType().split("/");
-//				this.outputStream.println("/" + packageParts[packageParts.length-1]+
-//					":" + this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
 				this.outputStream.println("/" + this.methodVisitor.methodLines.get(i).getInnerMethodShort().get(j) + ":" +
 						this.methodVisitor.methodLines.get(i).getInnerMethodName().get(j));
 			}
@@ -50,7 +46,6 @@ public class SDEDataContainer {
 		outputStream.println();
 		
 		for(int j = 2; j < this.methodVisitor.getInitSEQ().size();j++) {
-			//System.out.println("flag in printer: " + this.methodVisitor.methodLines.get(j-1).getMethodFlag());
 			if(this.methodVisitor.methodLines.get(j-1).getMethodFlag() == 1) { 
 				this.outputStream.println(this.MainNameShort + ":"+this.methodVisitor.methodLines.get(j-1).getReturnType()
 					+"="+this.methodVisitor.methodLines.get(j-1).getShortCutName()+".new");
