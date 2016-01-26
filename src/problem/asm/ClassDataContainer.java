@@ -33,6 +33,7 @@ public class ClassDataContainer {
 		if(declVisitor.isInterface()) {
 			outputStream.print("\\<\\<Interface\\>\\> \\l");
 		}
+		this.declVisitor.printRelationShipTypes(this.outputStream);
 		outputStream.print(declVisitor.nameGlobal + " | ");
 		printFields();
 	}
@@ -60,6 +61,10 @@ public class ClassDataContainer {
 		// TODO Auto-generated method stub
 		methodVisitor.printMethods(methodVisitor, outputStream);
 		printConnections();
+	}
+	
+	private void printCodeTypes() {
+		this.declVisitor.printCodeTypes(methodVisitor, fieldVisitor, outputStream);
 	}
 
 	private void printConnections() {

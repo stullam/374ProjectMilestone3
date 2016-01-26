@@ -47,20 +47,14 @@ public class DesignParser {
 			ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor, args);
 			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
 			ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor, args);
-			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
+			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, declVisitor);
 			ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor, args);
-			MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, methodVisitor);
-			
-			//MethodLineVisitor methodLineVisitor = new MethodLineVisitor(Opcodes.ASM5, fieldVisitor);
+
 			reader.accept(inheritanceArrow, ClassReader.EXPAND_FRAMES);
 			reader.accept(implementsArrow, ClassReader.EXPAND_FRAMES);
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			reader.accept(associationArrow, ClassReader.EXPAND_FRAMES);
 			reader.accept(usesArrow, ClassReader.EXPAND_FRAMES);
-			
-			//reader.accept(sexYGoogle, ClassReader.EXPAND_FRAMES);
-			//methodLineVisitor.visitCode();
-			//reader.accept(methodLineVisitor, ClassReader.EXPAND_FRAMES);
 			
 			ClassDataContainer newClassData = new ClassDataContainer(outputStream, declVisitor, fieldVisitor, methodVisitor,
 					inheritanceArrow, implementsArrow, associationArrow, usesArrow);
@@ -92,7 +86,7 @@ public class DesignParser {
 					ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 							declVisitor);
 					ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor, args);
-					ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className);
+					ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, declVisitor);
 					ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor, args);
 
 					reader.accept(inheritanceArrow, ClassReader.EXPAND_FRAMES);

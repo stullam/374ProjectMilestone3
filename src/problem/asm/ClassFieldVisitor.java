@@ -63,6 +63,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		if(type.equals(this.classDeclaration.getGlobalClassname())) {
 			setSingletonInField(true);
 			System.out.println("something in field");
+			this.classDeclaration.addPattern("Singleton");
 		}
 		
 		String line = symbol + " " + name + " : " + type + " \\l";

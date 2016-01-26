@@ -1,7 +1,9 @@
 package problem.asm;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
@@ -22,6 +24,8 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	private int OPS;
 	private boolean isSingleton;
 	public String className;
+	public HashMap<String, PatternIdentifierInterface> patternMap = new HashMap<String, PatternIdentifierInterface>();
+	public ArrayList<String> patternContainer = new ArrayList<String>();
 	
 	int version;
 	//int access;
@@ -48,6 +52,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.isSingleton = false;
 		//System.out.println("className when stuff happens: " + className);
 		this.className = className;
+		patternMap.put("Singleton", new SingletonPattern());
 	}
 
 	@Override
@@ -95,6 +100,32 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	}
 	public String getGlobalClassname() {
 		return this.className;
+	}
+	public void addPattern(String pattern) {
+		if(!this.patternContainer.contains(pattern)) {
+			this.patternContainer.add(pattern);
+		}
+	}
+	
+	public void printDesignPatterns(PrintWriter outputstream) {
+		for(int i = 0; i < this.patternContainer.size();i++){
+			patternMap.get(this.patternContainer.get(i)).printRelationship(outputstream);
+		}
+	}
+	
+	public void printCodeTypes(ClassMethodVisitor methodVisitor, ClassFieldVisitor fieldVisitor, PrintWriter outputStream) {
+		//
+		
+		if(methodVisitor.getSingletonInMethod() || fieldVisitor.getSingletonInField()) {
+			outputStream.print("color = blue");
+		}
+	}
+
+	public void printRelationShipTypes(PrintWriter outputStream) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < this.patternContainer.size();i++){
+			patternMap.get(this.patternContainer.get(i)).printRelationshipType(outputStream);
+		}
 	}
 
 }

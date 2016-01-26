@@ -30,8 +30,8 @@ public class MethodLineVisitor extends MethodVisitor {
 	public void visitMethodInsn(int opcode, String owner, String name, String desx, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desx, itf);
 		
-		System.out.println("owner: " + Type.getMethodType(owner));
-		System.out.println("name: " + Type.getMethodType(name));
+		//System.out.println("owner: " + Type.getMethodType(owner));
+		//System.out.println("name: " + Type.getMethodType(name));
 		//System.out.println("name: " + Type.getMethodType(desx));
 
 //		Type[] argTypes = Type.getArgumentTypes(desx);

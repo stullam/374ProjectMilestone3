@@ -22,16 +22,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ArrayList<String> argumentTypes = new ArrayList<String>();
 	private boolean singletonInMethod = false;
 	private ClassFieldVisitor fVisitor;
+	public ClassDeclarationVisitor classDecl;
 
 	public ClassMethodVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClassMethodVisitor(int arg0, ClassFieldVisitor fieldVisitor,String ClassName) {
+	public ClassMethodVisitor(int arg0, ClassFieldVisitor fieldVisitor,String ClassName, ClassDeclarationVisitor classD) {
 		super(arg0, fieldVisitor);
 		this.name = ClassName;
 		this.fVisitor = fieldVisitor;
+		this.classDecl = classD;
 	}
 	
 	@Override
@@ -75,6 +77,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 					if(returnType.equals(this.fVisitor.getGlobalClassName())) {
 						setSingletonInMethod(true);
 						System.out.println("something in method");
+						this.classDecl.addPattern("Singleton");
 					}
 					//if(returnType.equals(this.dec))
 				}
@@ -113,15 +116,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 		outputStream.println("\"");
 		
-		if(getSingletonInMethod() || fVisitor.getSingletonInField()) {
-			outputStream.print("color = blue");
-		}
+		this.classDecl.printDesignPatterns(outputStream);
 		
 		outputStream.println("];");
 		
 	}
 	public void setSingletonInMethod(boolean val) {
 		this.singletonInMethod = val;
+		
 	}
 	public boolean getSingletonInMethod() {
 		return this.singletonInMethod;
