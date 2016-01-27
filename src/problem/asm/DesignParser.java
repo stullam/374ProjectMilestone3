@@ -23,7 +23,6 @@ public class DesignParser {
 	public DesignParser(String classname) throws IOException{
 		// TODO Auto-generated constructor stub
 		this.CLASSNAME = classname;
-		//singleClassTester(classname);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -35,7 +34,6 @@ public class DesignParser {
 		//Use class decorators, add one for uses and one for association to get a better design
 		
 		PrintWriter outputStream = new PrintWriter("ManualAssociationFromImplementationClass.txt");
-		Charset charset = Charset.forName("US-ASCII");
 		outputStream.println("digraph Stankfile{");
 		outputStream.println("rankdir=BT;");
 		
@@ -70,11 +68,12 @@ public class DesignParser {
 		outputStream.close();
 	}
 	
-	public void singleClassTester(String className, String[] args) throws IOException {
+	public void run(String className) throws IOException {
 		//Use class decorators, add one for uses and one for association to get a better design
 		
-				PrintWriter outputStream = new PrintWriter("TESTCODE.txt");
-				Charset charset = Charset.forName("US-ASCII");
+				String[] args = new String[1];
+				args[0] = className;
+				PrintWriter outputStream = new PrintWriter("SINGLETON_TEST.txt");
 				outputStream.println("digraph Stankfile{");
 				outputStream.println("rankdir=BT;");
 				
