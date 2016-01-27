@@ -1,0 +1,8 @@
+digraph Stankfile{
+rankdir=BT;
+java404awt404Desktop[
+shape="record", 
+label = " {\<\<Singleton\>\> \l java404awt404Desktop |  peer : java404awt404peer404DesktopPeer \l peer : java404awt404peer404DesktopPeer \l peer : java404awt404peer404DesktopPeer \l| init() : void\l+ getDesktop() : java404awt404Desktop\l+ isDesktopSupported() : boolean\l+ isSupported() : boolean\l checkFileValidation() : void\l checkActionSupport() : void\l checkAWTPermission() : void\l+ open() : void\l+ edit() : void\l+ print() : void\l+ browse() : void\l+ mail() : void\l+ mail() : void\l checkExec() : void\lboolean\l}"
+ color = blue ];
+java404awt404Desktop -> "java404awt404Desktop"[arrowhead="curve", style="dashed"] 
+}

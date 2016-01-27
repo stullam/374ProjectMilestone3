@@ -13,15 +13,21 @@ import problem.asm.DesignParser;
 
 public class TestForSingleton {
 	
-	
 	@Test
 	public void testForNoSingleton() throws IOException
 	{
+		//Creates a DesignParser and runs it
 		DesignParser myParser = new DesignParser("problem.asm.Interface1");
-		File file = new File("ManualAssociationFromImplementationClass.txt");
+		myParser.run("problem.asm.Interface1");
+		
+		//Checks the file where the run method creates the Umlet TXT file
+		File file = new File("SINGLETON_TEST.txt");
+		
+		//creates a boolean value that only gets set to true iff blue is contained in the line
 		boolean thing = false;
 		
 		try {
+			//scans every line
 		    Scanner scanner = new Scanner(file);
 
 		    while (scanner.hasNextLine()) {
@@ -41,7 +47,8 @@ public class TestForSingleton {
 	public void testForSingletonInDesktop() throws IOException
 	{
 		DesignParser myParser = new DesignParser("java.awt.Desktop");
-		File file = new File("ManualAssociationFromImplementationClass.txt");
+		myParser.run("java.awt.Desktop");
+		File file = new File("SINGLETON_TEST.txt");
 		boolean thing = false;
 		
 		try {
@@ -49,14 +56,15 @@ public class TestForSingleton {
 
 		    while (scanner.hasNextLine()) {
 		        String line = scanner.nextLine();
+		        //find the word blue in the current line
 		        if(line.contains("blue")) { 
+		        	//sets it true as a singleton because our file creates it as blue
 		        	thing = true;
 		        }
-		        assertEquals(false, thing);
 		    }
+		    assertEquals(true, thing);
 		} catch(FileNotFoundException e) { 
 			fail("There's No File!");
-		    //handle this
 		}
 	}
 	
@@ -64,7 +72,8 @@ public class TestForSingleton {
 	public void testForSingletonInRuntime() throws IOException
 	{
 		DesignParser myParser = new DesignParser("java.lang.Runtime");
-		File file = new File("ManualAssociationFromImplementationClass.txt");
+		myParser.run("java.lang.Runtime");
+		File file = new File("SINGLETON_TEST.txt");
 		boolean thing = false;
 		
 		try {
@@ -76,7 +85,7 @@ public class TestForSingleton {
 		        	thing = true;
 		        }
 		    }
-		    assertEquals(false, thing);
+		    assertEquals(true, thing);
 		} catch(FileNotFoundException e) { 
 			fail("There's No File!");
 		    //handle this
@@ -87,7 +96,8 @@ public class TestForSingleton {
 	public void testForSingletonInCalendar() throws IOException
 	{
 		DesignParser myParser = new DesignParser("java.util.Calendar");
-		File file = new File("ManualAssociationFromImplementationClass.txt");
+		myParser.run("java.util.Calendar");
+		File file = new File("SINGLETON_TEST.txt");
 		boolean thing = false;
 		
 		try {
@@ -99,7 +109,7 @@ public class TestForSingleton {
 		        	thing = true;
 		        }
 		    }
-		    assertEquals(false, thing);
+		    assertEquals(true, thing);
 		} catch(FileNotFoundException e) { 
 			fail("There's No File!");
 		    //handle this
