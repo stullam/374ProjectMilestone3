@@ -21,7 +21,7 @@ public class TestForSingleton {
 		myParser.run("problem.asm.Interface1");
 		
 		//Checks the file where the run method creates the Umlet TXT file
-		File file = new File("SINGLETON_TEST.txt");
+		File file = new File("TESTCODE.txt");
 		
 		//creates a boolean value that only gets set to true iff blue is contained in the line
 		boolean thing = false;
@@ -48,7 +48,7 @@ public class TestForSingleton {
 	{
 		DesignParser myParser = new DesignParser("java.awt.Desktop");
 		myParser.run("java.awt.Desktop");
-		File file = new File("SINGLETON_TEST.txt");
+		File file = new File("TESTCODE.txt");
 		boolean thing = false;
 		
 		try {
@@ -73,7 +73,7 @@ public class TestForSingleton {
 	{
 		DesignParser myParser = new DesignParser("java.lang.Runtime");
 		myParser.run("java.lang.Runtime");
-		File file = new File("SINGLETON_TEST.txt");
+		File file = new File("TESTCODE.txt");
 		boolean thing = false;
 		
 		try {
@@ -98,7 +98,7 @@ public class TestForSingleton {
 	{
 		DesignParser myParser = new DesignParser("java.awt.Desktop");
 		myParser.run("java.awt.Desktop");
-		File file = new File("SINGLETON_TEST.txt");
+		File file = new File("TESTCODE.txt");
 		boolean thing = false;
 		
 		try {

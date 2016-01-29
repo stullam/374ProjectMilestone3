@@ -66,6 +66,9 @@ public class ClassContainer {
 						// The target is the implemented class
 						// the adapter is the current class
 						// the adaptee is the argTypesInClass.get(p)
+						System.out.println("THIS IS MY ADAPTER CLASS NAME:" +adapterClassName);
+						System.out.println("THIS IS MY ADAPTEE CLASS NAME:" +adapteeClassName);
+						System.out.println("THIS IS MY TARGET CLASS NAME:" +targetClassName);
 						for(int y = 0; y < this.classData.size();y++){
 							System.out.println("I am getting into the third for loop");
 							if(this.classData.get(y).className.contains(targetClassName)){

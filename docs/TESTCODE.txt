@@ -1,8 +1,0 @@
-digraph Stankfile{
-rankdir=BT;
-problem404asm404ExtendsClass2[
-shape="record", 
-label = " {problem404asm404ExtendsClass2 | + init() : void\lvoid\l}"
-];
-problem404asm404ExtendsClass2 -> javax404swing404JButton[arrowhead="onormal", style="solid"] 
-}
