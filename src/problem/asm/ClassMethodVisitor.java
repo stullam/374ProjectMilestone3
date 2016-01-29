@@ -20,6 +20,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ArrayList<String> methods = new ArrayList<String>();
 	public ArrayList<String> returnTypes = new ArrayList<String>();
 	public ArrayList<String> argumentTypes = new ArrayList<String>();
+	public ArrayList<String> argTypesDec= new ArrayList<String>();
 	private boolean singletonInMethod = false;
 	private ClassFieldVisitor fVisitor;
 	public ClassDeclarationVisitor classDecl;
@@ -44,6 +45,24 @@ public class ClassMethodVisitor extends ClassVisitor {
 		String returnType = Type.getReturnType(desc).getClassName();
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		List<String> stypes = new ArrayList<String>();
+		ArrayList<String> argTypesString = new ArrayList<String>();
+		
+		for(int i = 0; i < argTypes.length;i++) {
+			argTypesString.add(argTypes[i].toString());
+		}
+		
+		
+		for(int i = 0; i < argTypesString.size();i++) {
+			if(argTypesString.get(i).charAt(0) == 'L') {
+				argTypesString.set(i, argTypesString.get(i).substring(1));
+			}
+			if((argTypesString.get(i).charAt(0) == '[') && (argTypesString.get(i).charAt(1) == 'L')) {
+				argTypesString.set(i, argTypesString.get(i).substring(2));
+			}
+			System.out.println("argument types are: " + argTypesString.get(i));
+			this.classDecl.addArgTypesInClass(argTypesString.get(i));
+		}
+		//System.out.println("argument types are: " + argTypes);
 		
 		//System.out.println("visit Methods name: " + name);
 		toDecorate = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
@@ -74,7 +93,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 				if(returnType.contains(".")) {
 					returnType = returnType.replace(".", "404");
 					System.out.println("the return type is: " + returnType);
-					if(returnType.equals(this.fVisitor.getGlobalClassName())) {
+					if((returnType.equals(this.fVisitor.getGlobalClassName())) && ((access & Opcodes.ACC_STATIC) != 0)) {
 						setSingletonInMethod(true);
 						System.out.println("something in method");
 						this.classDecl.addPattern("Singleton");

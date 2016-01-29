@@ -92,11 +92,12 @@ public class TestForSingleton {
 		}
 	}
 	
+	//TODO: Make test for problem.asm.testNode
 	@Test
-	public void testForSingletonInCalendar() throws IOException
+	public void testForSingletonInTestNode() throws IOException
 	{
-		DesignParser myParser = new DesignParser("java.util.Calendar");
-		myParser.run("java.util.Calendar");
+		DesignParser myParser = new DesignParser("java.awt.Desktop");
+		myParser.run("java.awt.Desktop");
 		File file = new File("SINGLETON_TEST.txt");
 		boolean thing = false;
 		
@@ -105,15 +106,17 @@ public class TestForSingleton {
 
 		    while (scanner.hasNextLine()) {
 		        String line = scanner.nextLine();
+		        //find the word blue in the current line
 		        if(line.contains("blue")) { 
+		        	//sets it true as a singleton because our file creates it as blue
 		        	thing = true;
 		        }
 		    }
 		    assertEquals(true, thing);
 		} catch(FileNotFoundException e) { 
 			fail("There's No File!");
-		    //handle this
 		}
 	}
+
 
 }

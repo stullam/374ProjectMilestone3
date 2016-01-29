@@ -7,9 +7,7 @@ public class SingletonClassForGettingNames {
 		//do nothing
 	}
 	
-	public SingletonClassForGettingNames namesofstuff() {
-		return this.stuff;
+	public static SingletonClassForGettingNames namesofstuff() {
+		return stuff;
 	}
-	
-
 }

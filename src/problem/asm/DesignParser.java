@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -19,6 +20,7 @@ public class DesignParser {
 	
 	public static ArrayList<ClassDataContainer> classData = new ArrayList<ClassDataContainer>();
 	private String CLASSNAME;
+	public static ClassContainer classC = new ClassContainer();
 	
 	public DesignParser(String classname) throws IOException{
 		// TODO Auto-generated constructor stub
@@ -58,6 +60,8 @@ public class DesignParser {
 					inheritanceArrow, implementsArrow, associationArrow, usesArrow);
 			classData.add(newClassData);
 		}
+		classC.runClassContainer(classData);
+		
 		//System.out.println("class data size is: " + classData.size());
 		for(int k = 0; k < classData.size();k++) {
 			classData.get(k).printInformation();
@@ -67,6 +71,36 @@ public class DesignParser {
 		//System.out.println("Your file has been converted!");
 		outputStream.close();
 	}
+	
+//	public void runManyArgs(String[] args, PrintWriter outputStream) throws IOException {
+//		
+//		
+//		for(String className: args) {
+//			ClassReader reader = new ClassReader(className);
+//
+//			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
+//			ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor, args);
+//			ClassImplementsArrow implementsArrow = new ClassImplementsArrow(Opcodes.ASM5, declVisitor, args);
+//			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
+//			ClassUsesArrow usesArrow = new ClassUsesArrow(Opcodes.ASM5, declVisitor, args);
+//			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, className, declVisitor);
+//			ClassAssociationArrow associationArrow = new ClassAssociationArrow(Opcodes.ASM5, fieldVisitor, args);
+//
+//			reader.accept(inheritanceArrow, ClassReader.EXPAND_FRAMES);
+//			reader.accept(implementsArrow, ClassReader.EXPAND_FRAMES);
+//			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+//			reader.accept(associationArrow, ClassReader.EXPAND_FRAMES);
+//			reader.accept(usesArrow, ClassReader.EXPAND_FRAMES);
+//			
+//			ClassDataContainer newClassData = new ClassDataContainer(outputStream, declVisitor, fieldVisitor, methodVisitor,
+//					inheritanceArrow, implementsArrow, associationArrow, usesArrow);
+//			classData.add(newClassData);
+//		}
+//		//System.out.println("class data size is: " + classData.size());
+//		for(int k = 0; k < classData.size();k++) {
+//			classData.get(k).printInformation();
+//		}
+//	}
 	
 	public void run(String className) throws IOException {
 		//Use class decorators, add one for uses and one for association to get a better design

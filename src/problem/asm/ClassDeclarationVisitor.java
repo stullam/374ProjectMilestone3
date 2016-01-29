@@ -26,6 +26,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	public String className;
 	public HashMap<String, PatternIdentifierInterface> patternMap = new HashMap<String, PatternIdentifierInterface>();
 	public ArrayList<String> patternContainer = new ArrayList<String>();
+	public ArrayList<String> argTypesInClass = new ArrayList<String>();
 	
 	int version;
 	//int access;
@@ -53,6 +54,12 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		//System.out.println("className when stuff happens: " + className);
 		this.className = className;
 		patternMap.put("Singleton", new SingletonPattern());
+		patternMap.put("Adaptee", new ClassAdaptee());
+		patternMap.put("Adapter", new ClassAdapter());
+		patternMap.put("Component", new ClassComponent());
+		patternMap.put("NoArrow", new ClassDecoratorNoArrow());
+		patternMap.put("WithArrow", new ClassDecoratorWithArrow());
+		patternMap.put("Target", new ClassTarget());
 	}
 
 	@Override
@@ -72,6 +79,9 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		
 		if(superName !=null) {
 			this.extendNameGlobal = superName.replace("/", "404");
+			System.out.println("extendname: " + this.extendNameGlobal);
+			System.out.println("currentName: " + this.name + " or " + this.nameGlobal);
+			
 		}
 
 		for(int i = 0; i < interfaces.length; i++) {
@@ -126,6 +136,23 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		for(int i = 0; i < this.patternContainer.size();i++){
 			patternMap.get(this.patternContainer.get(i)).printRelationshipType(outputStream);
 		}
+	}
+	
+	public void printRelationShipArrowNames(PrintWriter outputStream) {
+		for(int i = 0; i < this.patternContainer.size();i++) {
+			patternMap.get(this.patternContainer.get(i)).printRelationShipArrowNames(outputStream);
+		}
+	}
+	
+	public void addArgTypesInClass(String argType) {
+		this.argTypesInClass.add(argType);
+	}
+	public ArrayList<String> getArgTypesInClass() {
+		return this.argTypesInClass;
+	}
+	
+	public ArrayList<String> getImplementers() {
+		return this.implementers;
 	}
 
 }

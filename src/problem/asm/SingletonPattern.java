@@ -16,4 +16,10 @@ public class SingletonPattern implements PatternIdentifierInterface {
 		outputstream.print("\\<\\<Singleton\\>\\> \\l ");
 	}
 
+	@Override
+	public void printRelationShipArrowNames(PrintWriter outputStream) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

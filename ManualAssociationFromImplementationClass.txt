@@ -1,3 +1,65 @@
 digraph Stankfile{
 rankdir=BT;
+headfirst404decorator404starbuzz404Beverage[
+shape="record", 
+label = " {\<\<Component\>\> \l headfirst404decorator404starbuzz404Beverage |  description : java404lang404String \l description : java404lang404String \l description : java404lang404String \l|+ init() : void\l+ getDescription() : java404lang404String\l+ cost() : double\ldouble\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404CondimentDecorator[
+shape="record", 
+label = " {\<\<Decorator\>\> \l headfirst404decorator404starbuzz404CondimentDecorator | + init() : void\l+ getDescription() : java404lang404String\ljava404lang404String\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404CondimentDecorator -> headfirst404decorator404starbuzz404Beverage[arrowhead="onormal", style="solid", 
+ label= " \<\<decorates\>\> " ] 
+headfirst404decorator404starbuzz404DarkRoast[
+shape="record", 
+label = " {headfirst404decorator404starbuzz404DarkRoast | + init() : void\l+ cost() : double\ldouble\l}"
+];
+headfirst404decorator404starbuzz404DarkRoast -> headfirst404decorator404starbuzz404Beverage[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404Decaf[
+shape="record", 
+label = " {headfirst404decorator404starbuzz404Decaf | + init() : void\l+ cost() : double\ldouble\l}"
+];
+headfirst404decorator404starbuzz404Decaf -> headfirst404decorator404starbuzz404Beverage[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404Espresso[
+shape="record", 
+label = " {headfirst404decorator404starbuzz404Espresso | + init() : void\l+ cost() : double\ldouble\l}"
+];
+headfirst404decorator404starbuzz404Espresso -> headfirst404decorator404starbuzz404Beverage[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404HouseBlend[
+shape="record", 
+label = " {headfirst404decorator404starbuzz404HouseBlend | + init() : void\l+ cost() : double\ldouble\l}"
+];
+headfirst404decorator404starbuzz404HouseBlend -> headfirst404decorator404starbuzz404Beverage[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404Milk[
+shape="record", 
+label = " {\<\<Decorator\>\> \l headfirst404decorator404starbuzz404Milk |  beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l|+ init() : void\l+ getDescription() : java404lang404String\l+ cost() : double\ldouble\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404Milk -> headfirst404decorator404starbuzz404CondimentDecorator[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404Mocha[
+shape="record", 
+label = " {\<\<Decorator\>\> \l headfirst404decorator404starbuzz404Mocha |  beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l|+ init() : void\l+ getDescription() : java404lang404String\l+ cost() : double\ldouble\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404Mocha -> headfirst404decorator404starbuzz404CondimentDecorator[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404Soy[
+shape="record", 
+label = " {\<\<Decorator\>\> \l headfirst404decorator404starbuzz404Soy |  beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l|+ init() : void\l+ getDescription() : java404lang404String\l+ cost() : double\ldouble\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404Soy -> headfirst404decorator404starbuzz404CondimentDecorator[arrowhead="onormal", style="solid", 
+] 
+headfirst404decorator404starbuzz404StarbuzzCoffee[
+shape="record", 
+label = " {headfirst404decorator404starbuzz404StarbuzzCoffee | + init() : void\l+ main() : void\lvoid\l}"
+];
+headfirst404decorator404starbuzz404Whip[
+shape="record", 
+label = " {\<\<Decorator\>\> \l headfirst404decorator404starbuzz404Whip |  beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l beverage : headfirst404decorator404starbuzz404Beverage \l|+ init() : void\l+ getDescription() : java404lang404String\l+ cost() : double\ldouble\l}"
+ style=filled, fillcolor=green ];
+headfirst404decorator404starbuzz404Whip -> headfirst404decorator404starbuzz404CondimentDecorator[arrowhead="onormal", style="solid", 
+] 
 }

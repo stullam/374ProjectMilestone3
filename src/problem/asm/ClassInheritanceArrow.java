@@ -67,8 +67,12 @@ public class ClassInheritanceArrow extends ClassVisitor {
 				//System.out.println("What the declextened is: " + inheritanceArrow.getNameOfExtension());
 				String argsContained = inheritanceArrow.getNameOfExtension().replace("404", ".");
 				if(argumentsToDP.contains(argsContained)) {
-					outputStream.println(declVisitor.nameGlobal + " -> " + inheritanceArrow.getNameOfExtension() + "[arrowhead=\"onormal\", style=\"solid\"] ");
-			
+					outputStream.println(declVisitor.nameGlobal + " -> " + 
+							inheritanceArrow.getNameOfExtension() + "[arrowhead=\"onormal\", style=\"solid\", "); //] ");
+					//outputStream.print("\"");
+					declVisitor.printRelationShipArrowNames(outputStream);
+					//outputStream.print("\"");
+					outputStream.println("] ");
 				}
 			}
 		}

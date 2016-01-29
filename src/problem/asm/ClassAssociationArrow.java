@@ -87,8 +87,13 @@ public class ClassAssociationArrow extends ClassVisitor{
 		for(int i = 1; i < associationArrow.argumentTypes.size(); i++) {
 			String argsContained = associationArrow.argumentTypes.get(i).replace("404", ".");
 			if(argumentsToDP.contains(argsContained)) {
-			outputStream.println(declVisitor.nameGlobal + " -> " + "\"" +associationArrow.argumentTypes.get(i) + "\"" + "[arrowhead=\"curve\", style=\"dashed\"] ");
-		
+			outputStream.println(declVisitor.nameGlobal + " -> " + "\"" 
+					+associationArrow.argumentTypes.get(i) + "\"" + "[arrowhead=\"curve\", style=\"dashed\""); //] ");
+			
+			declVisitor.printRelationShipArrowNames(outputStream);
+			
+			
+			outputStream.println("] ");
 			}
 		}
 		

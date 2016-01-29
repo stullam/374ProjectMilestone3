@@ -1,6 +1,8 @@
 package problem.asm;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ClassDataContainer {
 	PrintWriter outputStream = null;
@@ -11,6 +13,8 @@ public class ClassDataContainer {
 	ClassImplementsArrow implementsArrow = null;
 	ClassAssociationArrow associationArrow = null;
 	ClassUsesArrow usesArrow = null;
+	String className = null;
+	public static ArrayList<ClassDataContainer> classData;
 
 	public ClassDataContainer(PrintWriter outputStreamSent, ClassDeclarationVisitor declVisitorSent,
 			ClassFieldVisitor fieldVisitorSent, ClassMethodVisitor methodVisitorSent, ClassInheritanceArrow inheritanceArrowSent, 
@@ -24,9 +28,14 @@ public class ClassDataContainer {
 		this.implementsArrow = implementsArrowSent;
 		this.usesArrow = usesArrowSent;
 		this.associationArrow = associationArrowSent;
+		this.className = this.declVisitor.getGlobalClassname();
 	}
 	
 	public void printInformation() {
+//		for(int i = 0; i < this.declVisitor.getArgTypesInClass().size();i++){
+//			System.out.println("an argType in this class is: " + this.declVisitor.getArgTypesInClass().get(i));
+//		}
+		
 		outputStream.println(declVisitor.nameGlobal + "[");
 		outputStream.println("shape=\"record\", ");
 		outputStream.print("label = \" {");
@@ -73,6 +82,10 @@ public class ClassDataContainer {
 		implementsArrow.printConnections(implementsArrow, declVisitor, outputStream);
 		associationArrow.printConnections(associationArrow, declVisitor, outputStream);
 		usesArrow.printConnections(usesArrow, declVisitor, outputStream);
+	}
+	
+	public ClassDeclarationVisitor getClassDecl() {
+		return this.declVisitor;
 	}
 
 }
