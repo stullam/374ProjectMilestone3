@@ -17,7 +17,7 @@ public class TestForSingleton {
 	public void testForNoSingleton() throws IOException
 	{
 		//Creates a DesignParser and runs it
-		DesignParser myParser = new DesignParser("problem.asm.Interface1");
+		DesignParser myParser = new DesignParser();
 		myParser.run("problem.asm.Interface1");
 		
 		//Checks the file where the run method creates the Umlet TXT file
@@ -46,7 +46,7 @@ public class TestForSingleton {
 	@Test
 	public void testForSingletonInDesktop() throws IOException
 	{
-		DesignParser myParser = new DesignParser("java.awt.Desktop");
+		DesignParser myParser = new DesignParser();
 		myParser.run("java.awt.Desktop");
 		File file = new File("TESTCODE.txt");
 		boolean thing = false;
@@ -71,7 +71,7 @@ public class TestForSingleton {
 	@Test
 	public void testForSingletonInRuntime() throws IOException
 	{
-		DesignParser myParser = new DesignParser("java.lang.Runtime");
+		DesignParser myParser = new DesignParser();
 		myParser.run("java.lang.Runtime");
 		File file = new File("TESTCODE.txt");
 		boolean thing = false;
@@ -96,7 +96,7 @@ public class TestForSingleton {
 	@Test
 	public void testForSingletonInTestNode() throws IOException
 	{
-		DesignParser myParser = new DesignParser("java.awt.Desktop");
+		DesignParser myParser = new DesignParser();
 		myParser.run("java.awt.Desktop");
 		File file = new File("TESTCODE.txt");
 		boolean thing = false;

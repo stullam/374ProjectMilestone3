@@ -1,30 +1,17 @@
 package problem.asm;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class DesignParser {
 	
 	public static ArrayList<ClassDataContainer> classData = new ArrayList<ClassDataContainer>();
-	private String CLASSNAME;
 	
-	public DesignParser(String classname) throws IOException{
-		// TODO Auto-generated constructor stub
-		this.CLASSNAME = classname;
-	}
+	public DesignParser() throws IOException{}
 
 	public static void main(String[] args) throws IOException {
 		ClassContainer classC = new ClassContainer();
@@ -61,14 +48,11 @@ public class DesignParser {
 			classData.add(newClassData);
 		}
 		classC.runClassContainer(classData);
-		
-		//System.out.println("class data size is: " + classData.size());
 		for(int k = 0; k < classData.size();k++) {
 			classData.get(k).printInformation();
 		}
 		
 		outputStream.println("}");
-		//System.out.println("Your file has been converted!");
 		outputStream.close();
 	}
 	
@@ -103,19 +87,13 @@ public class DesignParser {
 					classData.add(newClassData);
 				}
 				classC.runClassContainer(classData);
-				
-				//System.out.println("class data size is: " + classData.size());
 				for(int k = 0; k < classData.size();k++) {
 					classData.get(k).printInformation();
 				}
 				
 				outputStream.println("}");
-				//System.out.println("Your file has been converted!");
 				outputStream.close();
 	}
 
-	public String getClassName() {
-		// TODO Auto-generated method stub
-		return this.CLASSNAME;
-	}
+
 }

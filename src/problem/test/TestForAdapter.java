@@ -15,7 +15,7 @@ public class TestForAdapter {
 	
 	public void check() throws IOException
 	{
-		DesignParser myParser = new DesignParser("problem.client.IteratorToEnumerationAdapter");
+		DesignParser myParser = new DesignParser();
 		myParser.run("problem.client.IteratorToEnumerationAdapter");
 	}
 
@@ -23,7 +23,7 @@ public class TestForAdapter {
 	public void testForAdapterInIterator() throws IOException
 	{
 		//Creates a DesignParser and runs it
-		DesignParser myParser = new DesignParser("problem.client.IteratorToEnumerationAdapter");
+		DesignParser myParser = new DesignParser();
 		myParser.run("problem.client.IteratorToEnumerationAdapter");
 		
 		//Checks the file where the run method creates the Umlet TXT file
@@ -53,7 +53,7 @@ public class TestForAdapter {
 	public void testForAdapterInEnumeration() throws IOException
 	{
 		//Creates a DesignParser and runs it
-		DesignParser myParser = new DesignParser("java.util.Enumeration");
+		DesignParser myParser = new DesignParser();
 		myParser.run("java.util.Enumeration");
 		
 		//Checks the file where the run method creates the Umlet TXT file
@@ -83,7 +83,7 @@ public class TestForAdapter {
 	public void testForAdapterInProblemClient() throws IOException
 	{
 		//Creates a DesignParser and runs it
-		DesignParser myParser = new DesignParser("");
+		DesignParser myParser = new DesignParser();
 		myParser.run("problem.client.IteratorToEnumerationAdapter java.util.Enumeration");
 		
 		//Checks the file where the run method creates the Umlet TXT file

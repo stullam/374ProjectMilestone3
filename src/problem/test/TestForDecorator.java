@@ -14,17 +14,17 @@ import problem.asm.DesignParser;
 public class TestForDecorator {
 
 	@Test
-	public void testForDecoratorInApp() throws IOException
+	public void testForDecoratorInStarbuzz() throws IOException
 	{
-		//Creates a DesignParser and runs it
-		DesignParser myParser = new DesignParser("problem.client.App");
-		myParser.run("problem.client.App");
+		//Creates a DesignParser with one of each type of Starbuzz component
+		DesignParser myParser = new DesignParser();
+		myParser.run("headfirst.decorator.starbuzz.Beverage headfirst.decorator.starbuzz.CondimentDecorator headfirst.decorator.starbuzz.DarkRoast headfirst.decorator.starbuzz.Soy");
 		
 		//Checks the file where the run method creates the Umlet TXT file
 		File file = new File("TESTCODE.txt");
 		
-		//creates a boolean value that only gets set to true iff blue is contained in the line
-		boolean thing = false;
+		//creates an integer value that only increments iff green is contained in the line
+		int count = 0;
 		
 		try {
 			//scans every line
@@ -32,16 +32,112 @@ public class TestForDecorator {
 
 		    while (scanner.hasNextLine()) {
 		        String line = scanner.nextLine();
-		        if(line.contains("red")) { 
-		        	thing = true;
+		        if(line.contains("green")) { 
+		        	count++;
 		        }
 		    }
-		    assertEquals(true, thing);
+		    //We EXPECT 3 Green shades 
+		    assertEquals(3, count);
 		} catch(FileNotFoundException e) { 
 			fail();
 		    //handle this
 		}
 	}
+	
+	@Test
+	public void testForDecoratorInBeverage() throws IOException
+	{
+		//Creates a DesignParser and runs it
+		DesignParser myParser = new DesignParser();
+		myParser.run("headfirst.decorator.starbuzz.Beverage");
+		
+		//Checks the file where the run method creates the Umlet TXT file
+		File file = new File("TESTCODE.txt");
+		
+		//creates an integer value that only increments iff green is contained in the line
+		int count = 0;
+		
+		try {
+			//scans every line
+		    Scanner scanner = new Scanner(file);
+
+		    while (scanner.hasNextLine()) {
+		        String line = scanner.nextLine();
+		        if(line.contains("green")) { 
+		        	count++;
+		        }
+		    }
+		    //We EXPECT NO Green shades 
+		    assertEquals(0, count);
+		} catch(FileNotFoundException e) { 
+			fail();
+		    //handle this
+		}
+	}
+	
+	@Test
+	public void testForDecoratorInCondimentDecorator() throws IOException
+	{
+		//Creates a DesignParser and runs it
+		DesignParser myParser = new DesignParser();
+		myParser.run("headfirst.decorator.starbuzz.CondimentDecorator");
+		
+		//Checks the file where the run method creates the Umlet TXT file
+		File file = new File("TESTCODE.txt");
+		
+		//creates an integer value that only increments iff green is contained in the line
+		int count = 0;
+		
+		try {
+			//scans every line
+		    Scanner scanner = new Scanner(file);
+
+		    while (scanner.hasNextLine()) {
+		        String line = scanner.nextLine();
+		        if(line.contains("green")) { 
+		        	count++;
+		        }
+		    }
+		    //We EXPECT NO Green shades 
+		    assertEquals(0, count);
+		} catch(FileNotFoundException e) { 
+			fail();
+		    //handle this
+		}
+	}
+	
+	@Test
+	public void testForDecoratorInSoy() throws IOException
+	{
+		//Creates a DesignParser and runs it
+		DesignParser myParser = new DesignParser();
+		myParser.run("headfirst.decorator.starbuzz.Soy");
+		
+		//Checks the file where the run method creates the Umlet TXT file
+		File file = new File("TESTCODE.txt");
+		
+		//creates an integer value that only increments iff green is contained in the line
+		int count = 0;
+		
+		try {
+			//scans every line
+		    Scanner scanner = new Scanner(file);
+
+		    while (scanner.hasNextLine()) {
+		        String line = scanner.nextLine();
+		        if(line.contains("green")) { 
+		        	count++;
+		        }
+		    }
+		    //We EXPECT 1 Green shade 
+		    assertEquals(1, count);
+		} catch(FileNotFoundException e) { 
+			fail();
+		    //handle this
+		}
+	}
+	
+	
 	
 
 }
