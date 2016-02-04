@@ -108,4 +108,34 @@ public class TestForAdapter {
 		    //handle this
 		}
 	}
+	
+	@Test
+	public void testForAdapterInInputStreamReader() throws IOException
+	{
+		//Creates a DesignParser and runs it
+		DesignParser myParser = new DesignParser();
+		myParser.run("java.lang.Object java.io.Reader java.io.InputStreamReader");
+		
+		//Checks the file where the run method creates the Umlet TXT file
+		File file = new File("TESTCODE.txt");
+		
+		//creates a boolean value that only gets set to true iff blue is contained in the line
+		int count = 0;
+		
+		try {
+			//scans every line
+		    Scanner scanner = new Scanner(file);
+
+		    while (scanner.hasNextLine()) {
+		        String line = scanner.nextLine();
+		        if(line.contains("purple")) { 
+		        	count++;
+		        }
+		    }
+		    assertEquals(2, count);
+		} catch(FileNotFoundException e) { 
+			fail();
+		    //handle this
+		}
+	}
 }
