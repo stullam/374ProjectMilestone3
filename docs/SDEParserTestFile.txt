@@ -1,0 +1,12 @@
+acto:pizzaaf.NYPizzaIngredientFactory
+/reateDoug:pizzaaf/Dough
+/reateSauc:pizzaaf/Sauce
+/CrustDoug:pizzaaf/ThinCrustDough
+/reateChees:pizzaaf/Cheese
+/reateVeggie:pizzaaf/Veggies[]
+/reatePepperon:pizzaaf/Pepperoni
+/reateCla:pizzaaf/Clams
+
+acto:pizzaaf/Dough=reateDoug.new
+reateDoug:CrustDoug.new
+reateDoug:pizzaaf/Dough=CrustDoug.createDough()
