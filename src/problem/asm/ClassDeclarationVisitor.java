@@ -83,9 +83,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		
 		if(superName !=null) {
 			this.extendNameGlobal = superName.replace("/", "404");
-			//System.out.println("extendname: " + this.extendNameGlobal);
-			//System.out.println("currentName: " + this.name + " or " + this.nameGlobal);
-			
 		}
 
 		for(int i = 0; i < interfaces.length; i++) {
@@ -165,6 +162,10 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	
 	public ArrayList<MethodData> getMethodDatas(){
 		return this.methoddatas;
+	}
+	
+	public String getExtendedName() {
+		return this.extendNameGlobal;
 	}
 
 }

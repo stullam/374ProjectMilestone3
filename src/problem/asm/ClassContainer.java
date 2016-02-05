@@ -154,68 +154,165 @@ public class ClassContainer {
 			}
 		}
 	}
-
+	
+//headfirst.iterator.dinermergercafe
+	
 	private void lookForComposites() {
+		
+		ArrayList<String> extendedClasses = new ArrayList<String>();
+		
+		for(int c = 0; c < this.classData.size();c++) {
+			//System.out.println("I dont think im getting here");
+			//System.out.println("classname, extended: " + this.classData.get(c).getClassDecl().getGlobalClassname() + "," +
+			//		this.classData.get(c).getClassDecl().getImplementedItems().toString());
+			if(this.classData.get(c).getClassDecl().getImplementedItems()!= null) {
+				for(int k = 0; k < this.classData.get(c).getClassDecl().getImplementedItems().size();k++){
+					if(!extendedClasses.contains(this.classData.get(c).getClassDecl().getImplementedItems().get(k))) {
+						extendedClasses.add(this.classData.get(c).getClassDecl().getImplementedItems().get(k));
+					}
+				}
+			}
+		}
+		
+		//System.out.println("implemented: " + extendedClasses.toString());
+		
+		for (int f = 0; f < this.classData.size(); f++) {
+			ClassDataContainer currentClass = this.classData.get(f);
+			ArrayList<String> impleClasses = new ArrayList<String>();
+			impleClasses = currentClass.getClassDecl().getImplementedItems();
+			//System.out.println("I");
+			for(int u = 0; u < impleClasses.size();u++){
+				//System.out.println("I am");
+				for(int r = 0;r<extendedClasses.size();r++){
+					//System.out.println("I am a");
+					if(impleClasses.get(u).contains(extendedClasses.get(r))){
+						// this is when you have a leaf
+						currentClass.getClassDecl().addPattern("Leaf");
+						//System.out.println("I am a leaf");
+					}
+				}
+			}
+		}
+		
+		for (int f = 0; f < this.classData.size(); f++) {
+			ClassDataContainer currentClass = this.classData.get(f);
+			ArrayList<String> impleClasses = new ArrayList<String>();
+			ArrayList<MethodData> methodDatas = currentClass.getClassDecl().getMethodDatas();
+			impleClasses = currentClass.getClassDecl().getImplementedItems();
+			//System.out.println("I");
+			for(int u = 0; u < impleClasses.size();u++){
+				//System.out.println("I am");
+				for(int r = 0;r<extendedClasses.size();r++){
+					//System.out.println("I am a");
+					for(int j = 0; j < methodDatas.size();j++) {
+						if(methodDatas.get(j).getReturnType().contains("Iterator")){
+							//System.out.println("I am a composite");
+							currentClass.getClassDecl().addPattern("Composite");
+						}
+					}
+				}
+			}
+		}
+		
+		for (int f = 0; f < this.classData.size(); f++) {
+			ClassDataContainer currentClass = this.classData.get(f);
+			ArrayList<String> impleClasses = new ArrayList<String>();
+			ArrayList<MethodData> methodDatas = currentClass.getClassDecl().getMethodDatas();
+			impleClasses = currentClass.getClassDecl().getImplementedItems();
+			for(int j = 0;j<extendedClasses.size();j++){
+				//if(currentClass.getClassDecl().getGlobalClassname().equals(extendedClasses.get(j))) {
+				if(extendedClasses.get(j).contains(currentClass.getClassDecl().getGlobalClassname())) {
+					System.out.println("I am a component");
+					currentClass.getClassDecl().addPattern("CompositeComponent");
+				}
+			}
+			//System.out.println("I");
+			
+		}
+		
+//		for (int b = 0; b < this.classData.size(); b++) {
+//			ClassDataContainer currentClass = this.classData.get(b);
+//			ArrayList<MethodData> methodDatas = currentClass.getClassDecl().getMethodDatas();
+//			String extendedClass = null;
+//			String implClass = null;
+//			ArrayList<String> impl = new ArrayList<String>();
+//			if(currentClass.getClassDecl().extendNameGlobal!= null) {
+//				extendedClass = currentClass.getClassDecl().extendNameGlobal;
+//				impl = currentClass.getClassDecl().getImplementedItems();
+//				for(int i = 0; i < methodDatas.size();i++) {
+//					String methodName = methodDatas.get(i).getMethodName().toString();
+//					if(methodDatas.get(i).getReturnType() != null) {
+//						String returnType = methodDatas.get(i).getReturnType();
+//						if(returnType.contains("Iterator")) {
+//						}
+//						
+//					}
+//				}
+//			}
+//		}
+		
+		
+		
 		// USE THIS TO HOLD YOUR EXTENDED CLASS
-		ArrayList<ClassDataContainer> compositeClasses = new ArrayList<ClassDataContainer>();
-
-		// USING A COUNT TO SEE IF THERE ARE ENOUGH METHODS THAT COUNT AS
-		// COMPOSITE METHODS
-		int count = 0;
-
-		// THIS WILL HOLD OUR COMPOSITE METHODS SUCH THAT WE CAN COMPARE THEM
-		// BETWEEN COMPOSITE AND COMPONENT CLASSES
-		ArrayList<MethodData> compositeMethods = new ArrayList<MethodData>();
-
-		for (int i = 0; i < this.classData.size(); i++) {
-			ClassDataContainer currentClass = this.classData.get(i);
-			String extendedName = currentClass.getClassDecl().extendNameGlobal;
-
-			// GRABS ALL METHODS FROM THE CLASS HERE
-			ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
-			for (int j = 0; j < myMethods.size(); j++) {
-				// IF A METHOD'S ARGUMENT SIZE IS ONE
-				if (myMethods.get(i).arguments != null) {
-					if (myMethods.get(i).arguments.size() == 1) {
-						if (myMethods.get(i).getArguments().get(0).contains(extendedName)) {
-							// Add one to the count because we found a
-							// "composite" method
-							count++;
-
-							// Add this method to the compositeMethods because
-							// we need to compare it with its extend class
-							compositeMethods.add(myMethods.get(i));
-
-							// Set the compositeClass
-							compositeClasses.add(currentClass);
-						}
-					}
-				}
-			}
-		}
-
-		if (count >= 2) {
-			// SETS THE COMPOSITE CLASS AS A COMPOSITE
-			for (int i = 0; i < compositeClasses.size(); i++) {
-				compositeClasses.get(i).getClassDecl().addPattern("Composite");
-
-				for (int k = 0; k < this.classData.size(); k++) {
-					ClassDataContainer currentClass = this.classData.get(i);
-
-					// CHECK IF THIS CLASS NAME IS OUR EXTENDED CLASS
-					if (currentClass.className.equals(compositeClasses.get(k).getClassDecl().extendNameGlobal)) {
-						ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
-						for (int j = 0; j < myMethods.size(); j++) {
-							// IF OUR COMPOSITE METHODS CONTAINS THIS EXTENDED
-							// CLASS METHOD
-							if (compositeMethods.contains(myMethods.get(j))) {
-								currentClass.getClassDecl().addPattern("CompositeComponent");
-							}
-						}
-					}
-				}
-			}
-		}
+//		ArrayList<ClassDataContainer> compositeClasses = new ArrayList<ClassDataContainer>();
+//
+//		// USING A COUNT TO SEE IF THERE ARE ENOUGH METHODS THAT COUNT AS
+//		// COMPOSITE METHODS
+//		int count = 0;
+//
+//		// THIS WILL HOLD OUR COMPOSITE METHODS SUCH THAT WE CAN COMPARE THEM
+//		// BETWEEN COMPOSITE AND COMPONENT CLASSES
+//		ArrayList<MethodData> compositeMethods = new ArrayList<MethodData>();
+//
+//		for (int i = 0; i < this.classData.size(); i++) {
+//			ClassDataContainer currentClass = this.classData.get(i);
+//			String extendedName = currentClass.getClassDecl().extendNameGlobal;
+//
+//			// GRABS ALL METHODS FROM THE CLASS HERE
+//			ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
+//			for (int j = 0; j < myMethods.size(); j++) {
+//				// IF A METHOD'S ARGUMENT SIZE IS ONE
+//				if (myMethods.get(i).arguments != null) {
+//					if (myMethods.get(i).arguments.size() == 1) {
+//						if (myMethods.get(i).getArguments().get(0).contains(extendedName)) {
+//							// Add one to the count because we found a
+//							// "composite" method
+//							count++;
+//
+//							// Add this method to the compositeMethods because
+//							// we need to compare it with its extend class
+//							compositeMethods.add(myMethods.get(i));
+//
+//							// Set the compositeClass
+//							compositeClasses.add(currentClass);
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (count >= 2) {
+//			// SETS THE COMPOSITE CLASS AS A COMPOSITE
+//			for (int i = 0; i < compositeClasses.size(); i++) {
+//				compositeClasses.get(i).getClassDecl().addPattern("Composite");
+//
+//				for (int k = 0; k < this.classData.size(); k++) {
+//					ClassDataContainer currentClass = this.classData.get(i);
+//
+//					// CHECK IF THIS CLASS NAME IS OUR EXTENDED CLASS
+//					if (currentClass.className.equals(compositeClasses.get(k).getClassDecl().extendNameGlobal)) {
+//						ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
+//						for (int j = 0; j < myMethods.size(); j++) {
+//							// IF OUR COMPOSITE METHODS CONTAINS THIS EXTENDED
+//							// CLASS METHOD
+//							if (compositeMethods.contains(myMethods.get(j))) {
+//								currentClass.getClassDecl().addPattern("CompositeComponent");
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
 
 	}
 }

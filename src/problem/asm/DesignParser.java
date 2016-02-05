@@ -27,6 +27,7 @@ public class DesignParser {
 		outputStream.println("rankdir=BT;");
 		
 		for(String className: args) {
+			System.out.println("random crap: " + className);
 			ClassReader reader = new ClassReader(className);
 
 			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
