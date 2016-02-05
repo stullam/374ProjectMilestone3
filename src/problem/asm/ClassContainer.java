@@ -2,6 +2,9 @@ package problem.asm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class ClassContainer {
 	public ArrayList<ClassDataContainer> classDataContainers = new ArrayList<ClassDataContainer>();
@@ -157,65 +160,78 @@ public class ClassContainer {
 
 	private void lookForComposites() {
 		// USE THIS TO HOLD YOUR EXTENDED CLASS
-		ArrayList<ClassDataContainer> compositeClasses = new ArrayList<ClassDataContainer>();
+		HashMap<ClassDataContainer, ArrayList<MethodData>> hm = new HashMap<ClassDataContainer, ArrayList<MethodData>>();
 
-		// USING A COUNT TO SEE IF THERE ARE ENOUGH METHODS THAT COUNT AS
-		// COMPOSITE METHODS
+		// USING A COUNT TO SEE IF THERE ARE ENOUGH METHODS THAT COUNT AS COMPOSITE METHODS
 		int count = 0;
-
-		// THIS WILL HOLD OUR COMPOSITE METHODS SUCH THAT WE CAN COMPARE THEM
-		// BETWEEN COMPOSITE AND COMPONENT CLASSES
-		ArrayList<MethodData> compositeMethods = new ArrayList<MethodData>();
-
+	
 		for (int i = 0; i < this.classData.size(); i++) {
 			ClassDataContainer currentClass = this.classData.get(i);
 			String extendedName = currentClass.getClassDecl().extendNameGlobal;
-
-			// GRABS ALL METHODS FROM THE CLASS HERE
+			
+			//GRABS THE NAME OF THE CURRENT CLASS
+			ClassDataContainer compositeClass = null;
+			
+			//GRABS ALL THE COMPOSITE METHODS FROM A SPECIFIC CLASS
+			ArrayList<MethodData> compositeMethods = new ArrayList<MethodData>();
+			
+			// GRABS ALL METHODS FROM THE CURRENT CLASS WE'RE LOOKING AT
 			ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
+			
 			for (int j = 0; j < myMethods.size(); j++) {
 				// IF A METHOD'S ARGUMENT SIZE IS ONE
-				if (myMethods.get(i).arguments != null) {
-					if (myMethods.get(i).arguments.size() == 1) {
-						if (myMethods.get(i).getArguments().get(0).contains(extendedName)) {
+				if (myMethods.get(j).arguments != null) {
+					if (myMethods.get(j).arguments.size() == 1) {
+						if (myMethods.get(j).getArguments().get(0).contains(extendedName)) {
 							// Add one to the count because we found a
 							// "composite" method
 							count++;
-
+							
+							compositeClass = currentClass;
+							
 							// Add this method to the compositeMethods because
 							// we need to compare it with its extend class
-							compositeMethods.add(myMethods.get(i));
+							compositeMethods.add(myMethods.get(j));
 
-							// Set the compositeClass
-							compositeClasses.add(currentClass);
 						}
 					}
 				}
 			}
+			if(compositeClass != null)
+			{
+				hm.put(compositeClass, compositeMethods);
+			}
+			
+			
 		}
 
+		
 		if (count >= 2) {
-			// SETS THE COMPOSITE CLASS AS A COMPOSITE
-			for (int i = 0; i < compositeClasses.size(); i++) {
-				compositeClasses.get(i).getClassDecl().addPattern("Composite");
-
-				for (int k = 0; k < this.classData.size(); k++) {
-					ClassDataContainer currentClass = this.classData.get(i);
-
-					// CHECK IF THIS CLASS NAME IS OUR EXTENDED CLASS
-					if (currentClass.className.equals(compositeClasses.get(k).getClassDecl().extendNameGlobal)) {
+			
+			//ITERATE THROUGHT THE HASHMAP
+			for (ClassDataContainer key : hm.keySet()) {
+				
+				//SET THE CURRENT COMPOSITE AS A COMPOSITE
+			    key.getClassDecl().addPattern("Composite");
+			    
+			    //ITERATE THROUGH OUR CLASSDATA TO FIND ITS EXTENDED CLASS
+			    for (int k = 0; k < this.classData.size(); k++) {
+					ClassDataContainer currentClass = this.classData.get(k);
+					
+					//IF OUR CURRENT CLASS'S NAME CONTAINS THE NAME OF ONE OF OUR COMPOSITE CLASSES...
+					if(currentClass.className.contains(key.getClassDecl().extendNameGlobal))
+					{
 						ArrayList<MethodData> myMethods = currentClass.getClassDecl().getMethodDatas();
-						for (int j = 0; j < myMethods.size(); j++) {
-							// IF OUR COMPOSITE METHODS CONTAINS THIS EXTENDED
-							// CLASS METHOD
-							if (compositeMethods.contains(myMethods.get(j))) {
+						for(int i=0; i< hm.get(key).size(); i++)
+						{
+							if(myMethods.contains(hm.get(key).get(i)))
+							{
 								currentClass.getClassDecl().addPattern("CompositeComponent");
 							}
 						}
 					}
-				}
-			}
+			    }
+			}	
 		}
-
 	}
 }
