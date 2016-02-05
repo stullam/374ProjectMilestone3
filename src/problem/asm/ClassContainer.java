@@ -29,6 +29,7 @@ public class ClassContainer {
 			//System.out.println("CurrentClassName: " + currentClass.className);
 			//System.out.println("CurrentClassNameExtension: " + currentClass.getClassDecl().extendNameGlobal);
 		}
+		System.out.println("I am currently looking for particular things but I am not really sure");
 		lookForDecorators();
 		lookForAdapters();
 	}
@@ -57,6 +58,7 @@ public class ClassContainer {
 					System.out.println("Am I getting here");
 					System.out.println("This could possibly be an adapter");
 					String adapteeClassName = argTypesInClass.get(p);
+					System.out.println("adapteeClassName: " + adapteeClassName);
 					String adapterClassName = currentClass.className;
 					String targetClassName;
 					System.out.println("the implementers: " + implementers.size());
@@ -66,9 +68,6 @@ public class ClassContainer {
 						// The target is the implemented class
 						// the adapter is the current class
 						// the adaptee is the argTypesInClass.get(p)
-						System.out.println("THIS IS MY ADAPTER CLASS NAME:" +adapterClassName);
-						System.out.println("THIS IS MY ADAPTEE CLASS NAME:" +adapteeClassName);
-						System.out.println("THIS IS MY TARGET CLASS NAME:" +targetClassName);
 						for(int y = 0; y < this.classData.size();y++){
 							System.out.println("I am getting into the third for loop");
 							if(this.classData.get(y).className.contains(targetClassName)){
@@ -83,6 +82,7 @@ public class ClassContainer {
 							}
 							if(this.classData.get(y).className.contains(adapteeClassName)){
 								// I should be a component
+								System.out.println("adapteeClassName: " + adapteeClassName);
 								this.classData.get(y).getClassDecl().addPattern("Adaptee");
 								System.out.println("I put an Adaptee");
 							}
@@ -103,13 +103,21 @@ public class ClassContainer {
 				argTypeToForm = argTypeToForm.replace(";", "");
 				//System.out.println("the name is: " + argTypeToForm);
 				String valueFromHash = classNamesToExtensions.get(currentClass.getClassDecl().className);
-				//System.out.println("getting from hash: " + valueFromHash);
+				System.out.println("getting from hash: " + valueFromHash);
 				String secondValueFromHash = classNamesToExtensions.get(valueFromHash);
-				//System.out.println("The second value from hash: " + secondValueFromHash);
-				//System.out.println("what it should be: " + argTypeToForm);
+				System.out.println("The second value from hash: " + secondValueFromHash);
+				System.out.println("what it should be: " + argTypeToForm);
 				
-				//System.out.println("If second value from hash and argTypeToForm are equal then I"
-						//+ "should make things be decorators, it just isnt comparing them right now");
+				if(currentClass.getClassDecl().patternContainer.contains("Singleton")) {
+					return;
+				}
+				
+				if(valueFromHash != null) {
+					if(valueFromHash.contains("ClassVisitor")) {
+						System.out.println("I found a one level decorator");
+						currentClass.getClassDecl().addPattern("NoArrow");
+					}
+				}
 				
 				// The component is the second value from hash
 				// the decorator with no arrow is the current class and 

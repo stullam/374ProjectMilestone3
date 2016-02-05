@@ -21,9 +21,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ArrayList<String> returnTypes = new ArrayList<String>();
 	public ArrayList<String> argumentTypes = new ArrayList<String>();
 	public ArrayList<String> argTypesDec= new ArrayList<String>();
+	//public ArrayList<Object> methodData = new ArrayList<Object>();
 	private boolean singletonInMethod = false;
 	private ClassFieldVisitor fVisitor;
 	public ClassDeclarationVisitor classDecl;
+	public MethodData metData = null;
 
 	public ClassMethodVisitor(int arg0) {
 		super(arg0);
@@ -62,9 +64,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 			System.out.println("argument types are: " + argTypesString.get(i));
 			this.classDecl.addArgTypesInClass(argTypesString.get(i));
 		}
-		//System.out.println("argument types are: " + argTypes);
-		
-		//System.out.println("visit Methods name: " + name);
 		toDecorate = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
 
 		// This block prints out all the argument types for each method
@@ -77,6 +76,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 				argumentTypes.add(stypes.get(k));
 			}
 		}
+		
+		ArrayList<String> argus = argumentTypes;
 		
 		String symbol = "";
 		if((access & Opcodes.ACC_PUBLIC) != 0) {
@@ -104,8 +105,24 @@ public class ClassMethodVisitor extends ClassVisitor {
 			}
 		}
 		
+		metData.setMethodName(name);
+		metData.setReturnType(returnType);
+		metData.setArguments(argus);
+		this.classDecl.addMethodDatas(metData);
+		
+		
 		String line = symbol + " " + name + "()" + " : " + returnType;
 		methods.add(line);
+		
+		ClassMethodLineVisitor newMethodLine = null;
+		//if(targetMethodName.equals(methodCallerName.substring(0,methodCallerName.indexOf("(")))) {
+			newMethodLine = new ClassMethodLineVisitor(Opcodes.ASM5, toDecorate, this);
+		//}
+		
+		if(newMethodLine != null) {
+			toDecorate = newMethodLine;
+		}
+		
 		return toDecorate;
 	}
 	

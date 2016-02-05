@@ -27,6 +27,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	public HashMap<String, PatternIdentifierInterface> patternMap = new HashMap<String, PatternIdentifierInterface>();
 	public ArrayList<String> patternContainer = new ArrayList<String>();
 	public ArrayList<String> argTypesInClass = new ArrayList<String>();
+	public ArrayList<MethodData> methoddatas = new ArrayList<MethodData>();
 	
 	int version;
 	//int access;
@@ -60,6 +61,9 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		patternMap.put("NoArrow", new ClassDecoratorNoArrow());
 		patternMap.put("WithArrow", new ClassDecoratorWithArrow());
 		patternMap.put("Target", new ClassTarget());
+		patternMap.put("Leaf", new ClassLeaf());
+		patternMap.put("CompositeComponent", new ClassCompositeComponent());
+		patternMap.put("Composite", new ClassComposite());
 	}
 
 	@Override
@@ -153,6 +157,10 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	
 	public ArrayList<String> getImplementers() {
 		return this.implementers;
+	}
+	
+	public void addMethodDatas(MethodData md) {
+		this.methoddatas.add(md);
 	}
 
 }

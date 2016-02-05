@@ -81,7 +81,7 @@ public class ClassDataContainer {
 		inheritanceArrow.printConnections(inheritanceArrow, declVisitor, outputStream);
 		implementsArrow.printConnections(implementsArrow, declVisitor, outputStream);
 		associationArrow.printConnections(associationArrow, declVisitor, outputStream);
-		usesArrow.printConnections(usesArrow, declVisitor, outputStream);
+		usesArrow.printConnections(usesArrow, declVisitor, outputStream, methodVisitor);
 	}
 	
 	public ClassDeclarationVisitor getClassDecl() {

@@ -2,24 +2,25 @@ package problem.asm;
 
 import java.io.PrintWriter;
 
-public class ClassTarget implements PatternIdentifierInterface {
+public class ClassCompositeComponent implements PatternIdentifierInterface {
 
 	@Override
 	public void printRelationshipType(PrintWriter outputstream) {
 		// TODO Auto-generated method stub
-		outputstream.print("\\<\\<Target\\>\\> \\l ");
+		outputstream.print("\\<\\<CompositeComponent\\>\\> \\l ");
 	}
 
 	@Override
 	public void printRelationship(PrintWriter outputstream) {
 		// TODO Auto-generated method stub
-		outputstream.print(" style=filled, fillcolor=purple ");
+		outputstream.print(" style=filled, fillcolor=yellow ");
+
 	}
 
 	@Override
 	public void printRelationShipArrowNames(PrintWriter outputStream) {
-		// Do Nothing
-		
+		// do nothing
+
 	}
 
 }

@@ -1,20 +1,22 @@
 digraph Stankfile{
 rankdir=BT;
-java404util404Enumeration[
+problem404client404AdapterToArrayList[
 shape="record", 
-label = " {\<\<Interface\>\> \l\<\<Target\>\> \l java404util404Enumeration | + hasMoreElements() : boolean\l+ nextElement() : java404lang404Object\ljava404lang404Object\l}"
+label = " {\<\<Adapter\>\> \l problem404client404AdapterToArrayList |  adapterList : java404util404Iterator \l adapterList : java404util404Iterator \l adapterList : java404util404Iterator \l|+ init() : void\l+ hasMoreElements() : boolean\l+ nextElement() : java404lang404String\l+ nextElement() : java404lang404Object\lproblem404client404AdapterToArrayList\l}"
  style=filled, fillcolor=purple ];
-problem404client404IteratorToEnumerationAdapter[
-shape="record", 
-label = " {\<\<Adapter\>\> \l problem404client404IteratorToEnumerationAdapter |  itr : java404util404Iterator \l itr : java404util404Iterator \l itr : java404util404Iterator \l|+ init() : void\l+ hasMoreElements() : boolean\l+ nextElement() : java404lang404Object\ljava404lang404Object\l}"
- style=filled, fillcolor=purple ];
-problem404client404IteratorToEnumerationAdapter -> java404util404Enumeration[arrowhead="onormal", style="dashed"] 
+problem404client404AdapterToArrayList -> "problem404client404AdapterToArrayList"[arrowhead="curve", style="solid"] 
 problem404client404App[
 shape="record", 
-label = " {problem404client404App | + init() : void\l+ main() : void\lvoid\l}"
+label = " {problem404client404App | + init() : void\l+ main() : void\lproblem404lib404LinearTransformer\l}"
 ];
+problem404client404App -> "problem404client404AdapterToArrayList"[arrowhead="curve", style="solid"] 
+problem404client404App -> "problem404lib404LinearTransformer"[arrowhead="curve", style="solid"] 
+problem404client404IteratorToEnumerationAdapter[
+shape="record", 
+label = " {\<\<Adapter\>\> \l problem404client404IteratorToEnumerationAdapter |  itr : java404util404Iterator \l itr : java404util404Iterator \l itr : java404util404Iterator \l|+ init() : void\l+ hasMoreElements() : boolean\l+ nextElement() : java404lang404Object\ljava404util404Iterator\l}"
+ style=filled, fillcolor=purple ];
 problem404lib404LinearTransformer[
 shape="record", 
-label = " {problem404lib404LinearTransformer |  enumTion : java404util404Enumeration \l enumTion : java404util404Enumeration \l enumTion : java404util404Enumeration \l|+ init() : void\l+ transform() : void\lvoid\l}"
+label = " {problem404lib404LinearTransformer |  enumTion : java404util404Enumeration \l enumTion : java404util404Enumeration \l enumTion : java404util404Enumeration \l|+ init() : void\l+ transform() : void\ljava404io404OutputStream\l}"
 ];
 }

@@ -73,15 +73,37 @@ public class ClassUsesArrow extends ClassVisitor {
 	}
 
 	public void printConnections(ClassUsesArrow usesArrow, ClassDeclarationVisitor declVisitor,
-			PrintWriter outputStream) {
+			PrintWriter outputStream, ClassMethodVisitor methodVisi) {
 		// TODO Auto-generated method stub
+		ArrayList<String> usesToPrint = new ArrayList<String>();
 		for(int i = 1; i < usesArrow.getFieldTypes().size();i++){
 			String argsContained = usesArrow.getFieldTypes().get(i).replace("404", ".");
 			if(argumentsToDP.contains(argsContained)) {
 				outputStream.println(declVisitor.nameGlobal + " -> " + "\"" + usesArrow.getFieldTypes().get(i) + "\"" + "[arrowhead=\"curve\", style=\"solid\"] ");
 			//for the uses stuff
 			}
+			
 		}
+		for(int i = 0; i < methodVisi.getArgumentTypes().size();i++){
+			System.out.println();
+			//System.out.println("The argument types for this are: " + methodVisi.getArgumentTypes().get(i));
+			//System.out.println(argumentsToDP.contains(methodVisi.getArgumentTypes().get(i)));
+			if(argumentsToDP.contains(methodVisi.getArgumentTypes().get(i).replace("404", "."))) {
+				methodVisi.getArgumentTypes().get(i).replace(".", "404");
+				System.out.println("The argument types for this are: " + methodVisi.getArgumentTypes().get(i));
+				if(!usesToPrint.contains(methodVisi.getArgumentTypes().get(i))) {
+					usesToPrint.add(methodVisi.getArgumentTypes().get(i));
+				}
+				//outputStream.println(declVisitor.nameGlobal + " -> " + "\"" + methodVisi.getArgumentTypes().get(i) + "\"" + "[arrowhead=\"curve\", style=\"solid\"] ");
+			//for the uses stuff
+			}
+			
+		}
+		for(int i = 0; i < usesToPrint.size();i++) {
+			outputStream.println(declVisitor.nameGlobal + " -> " + "\"" + usesToPrint.get(i) + "\"" + "[arrowhead=\"curve\", style=\"solid\"] ");
+		}
+		
+		System.out.println("arguments to dp: " + argumentsToDP.toString());
 		
 	}
 }
