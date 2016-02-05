@@ -19,19 +19,19 @@ public class ClassContainer {
 
 	public void runClassContainer(ArrayList<ClassDataContainer> classDataSet) {
 		this.classData = classDataSet;
-		System.out.println("Holy crap we made it here for the entire time of the thingy");
+		//System.out.println("Holy crap we made it here for the entire time of the thingy");
 		for (int b = 0; b < this.classData.size(); b++) {
 			ClassDataContainer currentClass = this.classData.get(b);
 
 			classNamesToImplementers.put(currentClass.className, currentClass.getClassDecl().getImplementers());
 
 			classNamesToExtensions.put(currentClass.className, currentClass.getClassDecl().extendNameGlobal);
-			// System.out.println("CurrentClassName: " +
+			// //System.out.println("CurrentClassName: " +
 			// currentClass.className);
-			// System.out.println("CurrentClassNameExtension: " +
+			// //System.out.println("CurrentClassNameExtension: " +
 			// currentClass.getClassDecl().extendNameGlobal);
 		}
-		System.out.println("I am currently looking for particular things but I am not really sure");
+		//System.out.println("I am currently looking for particular things but I am not really sure");
 		lookForDecorators();
 		lookForAdapters();
 		lookForComposites();
@@ -39,7 +39,7 @@ public class ClassContainer {
 
 	private void lookForAdapters() {
 		// TODO Auto-generated method stub
-		System.out.println("I am getting to the adapter ");
+		//System.out.println("I am getting to the adapter ");
 		for (int i = 0; i < this.classData.size(); i++) {
 			ClassDataContainer currentClass = this.classData.get(i);
 			ArrayList<String> fieldsInClass = currentClass.fieldVisitor.getFieldTypes();
@@ -53,41 +53,41 @@ public class ClassContainer {
 			}
 
 			for (int p = 0; p < argTypesInClass.size(); p++) {
-				// System.out.println("I am getting into the second for loop");
-				System.out.println("fields in class: " + fieldsInClass);
-				System.out.println("argtypes in class: " + argTypesInClass.toString());
+				// //System.out.println("I am getting into the second for loop");
+				//System.out.println("fields in class: " + fieldsInClass);
+				//System.out.println("argtypes in class: " + argTypesInClass.toString());
 				if (fieldsInClass.contains(argTypesInClass.get(p))) {
 					// ths is basically an adapter
-					System.out.println("Am I getting here");
-					System.out.println("This could possibly be an adapter");
+					//System.out.println("Am I getting here");
+					//System.out.println("This could possibly be an adapter");
 					String adapteeClassName = argTypesInClass.get(p);
-					System.out.println("adapteeClassName: " + adapteeClassName);
+					//System.out.println("adapteeClassName: " + adapteeClassName);
 					String adapterClassName = currentClass.className;
 					String targetClassName;
-					System.out.println("the implementers: " + implementers.size());
+					//System.out.println("the implementers: " + implementers.size());
 					if (implementers.size() != 0) {
-						System.out.println("This is definitely an adapter");
+						//System.out.println("This is definitely an adapter");
 						targetClassName = implementers.get(0);
 						// The target is the implemented class
 						// the adapter is the current class
 						// the adaptee is the argTypesInClass.get(p)
 						for (int y = 0; y < this.classData.size(); y++) {
-							System.out.println("I am getting into the third for loop");
+							//System.out.println("I am getting into the third for loop");
 							if (this.classData.get(y).className.contains(targetClassName)) {
 								// I should be a decorator with no arrow
 								this.classData.get(y).getClassDecl().addPattern("Target");
-								System.out.println("I put an Target");
+								//System.out.println("I put an Target");
 							}
 							if (this.classData.get(y).className.contains(adapterClassName)) {
 								// I should be a decorator with an arrow
 								this.classData.get(y).getClassDecl().addPattern("Adapter");
-								System.out.println("I put an Adapter");
+								//System.out.println("I put an Adapter");
 							}
 							if (this.classData.get(y).className.contains(adapteeClassName)) {
 								// I should be a component
-								System.out.println("adapteeClassName: " + adapteeClassName);
+								//System.out.println("adapteeClassName: " + adapteeClassName);
 								this.classData.get(y).getClassDecl().addPattern("Adaptee");
-								System.out.println("I put an Adaptee");
+								//System.out.println("I put an Adaptee");
 							}
 						}
 					}
@@ -104,12 +104,12 @@ public class ClassContainer {
 			for (int j = 0; j < argTypesInClass.size(); j++) {
 				String argTypeToForm = argTypesInClass.get(j).toString().replace("/", "404");
 				argTypeToForm = argTypeToForm.replace(";", "");
-				// System.out.println("the name is: " + argTypeToForm);
+				// //System.out.println("the name is: " + argTypeToForm);
 				String valueFromHash = classNamesToExtensions.get(currentClass.getClassDecl().className);
-				System.out.println("getting from hash: " + valueFromHash);
+				//System.out.println("getting from hash: " + valueFromHash);
 				String secondValueFromHash = classNamesToExtensions.get(valueFromHash);
-				System.out.println("The second value from hash: " + secondValueFromHash);
-				System.out.println("what it should be: " + argTypeToForm);
+				//System.out.println("The second value from hash: " + secondValueFromHash);
+				//System.out.println("what it should be: " + argTypeToForm);
 
 				if (currentClass.getClassDecl().patternContainer.contains("Singleton")) {
 					return;
@@ -117,7 +117,7 @@ public class ClassContainer {
 
 				if (valueFromHash != null) {
 					if (valueFromHash.contains("ClassVisitor")) {
-						System.out.println("I found a one level decorator");
+						//System.out.println("I found a one level decorator");
 						currentClass.getClassDecl().addPattern("NoArrow");
 					}
 				}
@@ -127,7 +127,7 @@ public class ClassContainer {
 				// the first value from hash is the decorator with arrow
 				if (secondValueFromHash != null) {
 					if (argTypeToForm.contains(secondValueFromHash)) {
-						// System.out.println("I solved this problem");
+						// //System.out.println("I solved this problem");
 
 						// this is where I add in the statements for the pattern
 						// in the hashmaps
@@ -135,17 +135,17 @@ public class ClassContainer {
 							if (this.classData.get(y).className.contains(currentClass.getClassDecl().className)) {
 								// I should be a decorator with no arrow
 								this.classData.get(y).getClassDecl().addPattern("NoArrow");
-								System.out.println("I put an NoArrow");
+								//System.out.println("I put an NoArrow");
 							}
 							if (this.classData.get(y).className.contains(valueFromHash)) {
 								// I should be a decorator with an arrow
 								this.classData.get(y).getClassDecl().addPattern("WithArrow");
-								System.out.println("I put an WithArrow");
+								//System.out.println("I put an WithArrow");
 							}
 							if (this.classData.get(y).className.contains(secondValueFromHash)) {
 								// I should be a component
 								this.classData.get(y).getClassDecl().addPattern("Component");
-								System.out.println("I put an Component");
+								//System.out.println("I put an Component");
 							}
 
 						}

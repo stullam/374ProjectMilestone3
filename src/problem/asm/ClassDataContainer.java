@@ -33,7 +33,7 @@ public class ClassDataContainer {
 	
 	public void printInformation() {
 //		for(int i = 0; i < this.declVisitor.getArgTypesInClass().size();i++){
-//			System.out.println("an argType in this class is: " + this.declVisitor.getArgTypesInClass().get(i));
+//			//System.out.println("an argType in this class is: " + this.declVisitor.getArgTypesInClass().get(i));
 //		}
 		
 		outputStream.println(declVisitor.nameGlobal + "[");

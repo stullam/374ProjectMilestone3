@@ -51,20 +51,20 @@ public class ClassMethodLineVisitor extends MethodVisitor{
 		//this.locFieldV = locFieldV;
 		//this.reader = reader;
 		//this.DEPTH = i;
-		System.out.println("Im hitting here again up top way up high");
+		//System.out.println("Im hitting here again up top way up high");
 	}
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desx, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desx, itf);
 		System.out.print("owner: " + owner);
-		System.out.println("name: " + name);
-		System.out.println("owner but idk: " + owner);
+		//System.out.println("name: " + name);
+		//System.out.println("owner but idk: " + owner);
 		
 		this.MethodVisi.argumentTypes.add(owner.replace("/", "404"));
 		
 //		if((owner.toString().contains("init"))){
-//			System.out.println();
+//			//System.out.println();
 //		}
 		
 //		this.lineReturnType = Type.getReturnType(desx).getClassName();
@@ -74,9 +74,9 @@ public class ClassMethodLineVisitor extends MethodVisitor{
 //		String OWNER = Type.getMethodType(owner).toString();
 //		String ownerToClass = OWNER.replaceAll("/", ".");
 //		
-//		System.out.println("SDE owner: " + Type.getMethodType(owner)); 
-//		System.out.println("SDE name: " + Type.getMethodType(name));		
-//		System.out.println("caller sn: " + this.callerShortName);
+//		//System.out.println("SDE owner: " + Type.getMethodType(owner)); 
+//		//System.out.println("SDE name: " + Type.getMethodType(name));		
+//		//System.out.println("caller sn: " + this.callerShortName);
 //		
 //		String ownerNShort = Type.getMethodType(owner).toString().substring(0, Type.getMethodType(owner).toString().length()-2);
 //		
@@ -110,7 +110,7 @@ public class ClassMethodLineVisitor extends MethodVisitor{
 		return this.name;
 	}
 	public ArrayList<String> getInnerMethodCallNames() {
-		System.out.println("INSIDE: " + innerMethodCallNames.toString());
+		//System.out.println("INSIDE: " + innerMethodCallNames.toString());
 		return this.innerMethodCallNames;
 	}
 }

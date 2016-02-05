@@ -52,7 +52,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.nameGlobal = className;
 		this.OPS = asm5;
 		this.isSingleton = false;
-		//System.out.println("className when stuff happens: " + className);
+		////System.out.println("className when stuff happens: " + className);
 		this.className = className;
 		patternMap.put("Singleton", new SingletonPattern());
 		patternMap.put("Adaptee", new ClassAdaptee());
@@ -83,8 +83,8 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		
 		if(superName !=null) {
 			this.extendNameGlobal = superName.replace("/", "404");
-			System.out.println("extendname: " + this.extendNameGlobal);
-			System.out.println("currentName: " + this.name + " or " + this.nameGlobal);
+			//System.out.println("extendname: " + this.extendNameGlobal);
+			//System.out.println("currentName: " + this.name + " or " + this.nameGlobal);
 			
 		}
 

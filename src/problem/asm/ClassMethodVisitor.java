@@ -61,7 +61,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			if((argTypesString.get(i).charAt(0) == '[') && (argTypesString.get(i).charAt(1) == 'L')) {
 				argTypesString.set(i, argTypesString.get(i).substring(2));
 			}
-			System.out.println("argument types are: " + argTypesString.get(i));
+			//System.out.println("argument types are: " + argTypesString.get(i));
 			this.classDecl.addArgTypesInClass(argTypesString.get(i));
 		}
 		toDecorate = new MethodLineVisitor(Opcodes.ASM5, toDecorate);
@@ -93,10 +93,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 			}else {
 				if(returnType.contains(".")) {
 					returnType = returnType.replace(".", "404");
-					System.out.println("the return type is: " + returnType);
+					//System.out.println("the return type is: " + returnType);
 					if((returnType.equals(this.fVisitor.getGlobalClassName())) && ((access & Opcodes.ACC_STATIC) != 0)) {
 						setSingletonInMethod(true);
-						System.out.println("something in method");
+						//System.out.println("something in method");
 						this.classDecl.addPattern("Singleton");
 					}
 					//if(returnType.equals(this.dec))
@@ -128,9 +128,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 	
 	@Override
 	public void visitInnerClass(String name, String outerName, String innerName, int access){
-		//System.out.println("visit inner: " + name);
-		//System.out.println("outerName: " + outerName);
-		//System.out.println("innerName: " + innerName);
+		////System.out.println("visit inner: " + name);
+		////System.out.println("outerName: " + outerName);
+		////System.out.println("innerName: " + innerName);
 		
 		
 	}

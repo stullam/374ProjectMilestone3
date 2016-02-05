@@ -57,19 +57,19 @@ public class ClassFieldVisitor extends ClassVisitor {
 			symbol = "+";
 		}
 		
-		//System.out.println("access: " + access);
-		//System.out.println("fieldname: " + name);
-		//System.out.println("type: " + type);
+		////System.out.println("access: " + access);
+		////System.out.println("fieldname: " + name);
+		////System.out.println("type: " + type);
 		if(type.equals(this.classDeclaration.getGlobalClassname())) {
 			setSingletonInField(true);
-			System.out.println("something in field");
+			//System.out.println("something in field");
 			this.classDeclaration.addPattern("Singleton");
 		}
 		
 		String line = symbol + " " + name + " : " + type + " \\l";
 		fields.add(line);
 		
-		//System.out.println("field stuff: " + name.toString());
+		////System.out.println("field stuff: " + name.toString());
 		
 		return toDecorate;
 	}
@@ -87,7 +87,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 	}
 	public void setGlobalClassName() {
 		this.globalClassName = this.classDeclaration.getGlobalClassname();
-		//System.out.println("field globalClassname: " + this.classDeclaration.getGlobalClassname());
+		////System.out.println("field globalClassname: " + this.classDeclaration.getGlobalClassname());
 	}
 	public String getGlobalClassName() {
 		return this.globalClassName;

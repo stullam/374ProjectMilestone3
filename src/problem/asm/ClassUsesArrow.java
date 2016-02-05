@@ -85,12 +85,12 @@ public class ClassUsesArrow extends ClassVisitor {
 			
 		}
 		for(int i = 0; i < methodVisi.getArgumentTypes().size();i++){
-			System.out.println();
+			//System.out.println();
 			//System.out.println("The argument types for this are: " + methodVisi.getArgumentTypes().get(i));
 			//System.out.println(argumentsToDP.contains(methodVisi.getArgumentTypes().get(i)));
 			if(argumentsToDP.contains(methodVisi.getArgumentTypes().get(i).replace("404", "."))) {
 				methodVisi.getArgumentTypes().get(i).replace(".", "404");
-				System.out.println("The argument types for this are: " + methodVisi.getArgumentTypes().get(i));
+				//System.out.println("The argument types for this are: " + methodVisi.getArgumentTypes().get(i));
 				if(!usesToPrint.contains(methodVisi.getArgumentTypes().get(i))) {
 					usesToPrint.add(methodVisi.getArgumentTypes().get(i));
 				}
@@ -103,7 +103,7 @@ public class ClassUsesArrow extends ClassVisitor {
 			outputStream.println(declVisitor.nameGlobal + " -> " + "\"" + usesToPrint.get(i) + "\"" + "[arrowhead=\"curve\", style=\"solid\"] ");
 		}
 		
-		System.out.println("arguments to dp: " + argumentsToDP.toString());
+		//System.out.println("arguments to dp: " + argumentsToDP.toString());
 		
 	}
 }
