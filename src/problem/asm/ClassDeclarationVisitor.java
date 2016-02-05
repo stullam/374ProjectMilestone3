@@ -162,5 +162,9 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	public void addMethodDatas(MethodData md) {
 		this.methoddatas.add(md);
 	}
+	
+	public ArrayList<MethodData> getMethodDatas(){
+		return this.methoddatas;
+	}
 
 }
