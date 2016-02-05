@@ -114,7 +114,7 @@ public class TestForAdapter {
 	{
 		//Creates a DesignParser and runs it
 		DesignParser myParser = new DesignParser();
-		myParser.run("java.lang.Object java.io.Reader java.io.InputStreamReader");
+		myParser.run("java.io.Reader java.io.InputStreamReader java.io.InputStream sun.nio.cs.StreamDecoder");
 		
 		//Checks the file where the run method creates the Umlet TXT file
 		File file = new File("TESTCODE.txt");

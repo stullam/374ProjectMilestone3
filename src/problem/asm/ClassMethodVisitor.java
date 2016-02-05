@@ -25,7 +25,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	private boolean singletonInMethod = false;
 	private ClassFieldVisitor fVisitor;
 	public ClassDeclarationVisitor classDecl;
-	public MethodData metData = null;
+	public MethodData metData = new MethodData();
 
 	public ClassMethodVisitor(int arg0) {
 		super(arg0);
