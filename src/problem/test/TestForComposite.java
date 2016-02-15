@@ -38,7 +38,7 @@ public class TestForComposite {
 		        }
 		    }
 		    //We EXPECT 3 Green shades 
-		    assertEquals(3, count);
+		    assertEquals(2, count);
 		} catch(FileNotFoundException e) { 
 			fail();
 		    //handle this
@@ -69,7 +69,7 @@ public class TestForComposite {
 		        }
 		    }
 		    //We EXPECT 3 Green shades 
-		    assertEquals(3, count);
+		    assertEquals(2, count);
 		} catch(FileNotFoundException e) { 
 			fail();
 		    //handle this
@@ -100,7 +100,7 @@ public class TestForComposite {
 		        }
 		    }
 		    //We EXPECT 3 Green shades 
-		    assertEquals(3, count);
+		    assertEquals(0, count);
 		} catch(FileNotFoundException e) { 
 			fail();
 		    //handle this
@@ -132,7 +132,7 @@ public class TestForComposite {
 		        }
 		    }
 		    //We EXPECT 3 Green shades 
-		    assertEquals(3, count);
+		    assertEquals(2, count);
 		} catch(FileNotFoundException e) { 
 			fail();
 		    //handle this
@@ -162,7 +162,7 @@ public class TestForComposite {
 			        }
 			    }
 			    //We EXPECT 3 Green shades 
-			    assertEquals(3, count);
+			    assertEquals(6, count);
 			} catch(FileNotFoundException e) { 
 				fail();
 			    //handle this

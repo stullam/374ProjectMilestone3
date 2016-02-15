@@ -1,48 +1,127 @@
 digraph Stankfile{
 rankdir=BT;
-headfirst404iterator404dinermergercafe404CafeMenu[
+problem404asm404ClassDataContainer[
 shape="record", 
-label = " {\<\<Leaf\>\> \l \<\<Composite\>\> \l headfirst404iterator404dinermergercafe404CafeMenu |  menuItems : java404util404Hashtable \l menuItems : java404util404Hashtable \l menuItems : java404util404Hashtable \l|+ init() : void\l+ addItem() : void\l+ getItems() : java404util404Hashtable\l+ createIterator() : java404util404Iterator\ljava404util404Collection\l}"
- style=filled, fillcolor=yellow  style=filled, fillcolor=yellow ];
-headfirst404iterator404dinermergercafe404CafeMenu -> headfirst404iterator404dinermergercafe404Menu[arrowhead="onormal", style="dashed"] 
-headfirst404iterator404dinermergercafe404CafeMenu -> "headfirst404iterator404dinermergercafe404CafeMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404DinerMenu[
-shape="record", 
-label = " {\<\<Leaf\>\> \l \<\<Composite\>\> \l headfirst404iterator404dinermergercafe404DinerMenu |  MAX_ITEMS : int \l numberOfItems : int \l menuItems : headfirst404iterator404dinermergercafe404MenuItem[] \l MAX_ITEMS : int \l numberOfItems : int \l menuItems : headfirst404iterator404dinermergercafe404MenuItem[] \l menuItems : headfirst404iterator404dinermergercafe404MenuItem[] \l|+ init() : void\l+ addItem() : void\l+ getMenuItems() : headfirst404iterator404dinermergercafe404MenuItem[]\l+ createIterator() : java404util404Iterator\lheadfirst404iterator404dinermergercafe404DinerMenuIterator\l}"
- style=filled, fillcolor=yellow  style=filled, fillcolor=yellow ];
-headfirst404iterator404dinermergercafe404DinerMenu -> headfirst404iterator404dinermergercafe404Menu[arrowhead="onormal", style="dashed"] 
-headfirst404iterator404dinermergercafe404DinerMenu -> "headfirst404iterator404dinermergercafe404DinerMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404DinerMenu -> "headfirst404iterator404dinermergercafe404DinerMenuIterator"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404DinerMenuIterator[
-shape="record", 
-label = " {\<\<Leaf\>\> \l headfirst404iterator404dinermergercafe404DinerMenuIterator |  list : headfirst404iterator404dinermergercafe404MenuItem[] \l position : int \l list : headfirst404iterator404dinermergercafe404MenuItem[] \l position : int \l position : int \l|+ init() : void\l+ next() : java404lang404Object\l+ hasNext() : boolean\l+ remove() : void\ljava404lang404IllegalStateException\l}"
- style=filled, fillcolor=yellow ];
-headfirst404iterator404dinermergercafe404Menu[
-shape="record", 
-label = " {\<\<Interface\>\> \l\<\<CompositeComponent\>\> \l headfirst404iterator404dinermergercafe404Menu | + createIterator() : java404util404Iterator\ljava404util404Iterator\l}"
- style=filled, fillcolor=yellow ];
-headfirst404iterator404dinermergercafe404MenuTestDrive[
-shape="record", 
-label = " {headfirst404iterator404dinermergercafe404MenuTestDrive | + init() : void\l+ main() : void\ljava404io404PrintStream\l}"
+label = " {problem404asm404ClassDataContainer |  outputStream : java404io404PrintWriter \l declVisitor : problem404asm404ClassDeclarationVisitor \l fieldVisitor : problem404asm404ClassFieldVisitor \l methodVisitor : problem404asm404ClassMethodVisitor \l inheritanceArrow : problem404asm404ClassInheritanceArrow \l implementsArrow : problem404asm404ClassImplementsArrow \l associationArrow : problem404asm404ClassAssociationArrow \l usesArrow : problem404asm404ClassUsesArrow \l className : java404lang404String \l+ classData : java404util404ArrayList \l+ outputStream : java404io404PrintWriter \l+ declVisitor : problem404asm404ClassDeclarationVisitor \l+ fieldVisitor : problem404asm404ClassFieldVisitor \l+ methodVisitor : problem404asm404ClassMethodVisitor \l+ inheritanceArrow : problem404asm404ClassInheritanceArrow \l+ implementsArrow : problem404asm404ClassImplementsArrow \l+ associationArrow : problem404asm404ClassAssociationArrow \l+ usesArrow : problem404asm404ClassUsesArrow \l+ className : java404lang404String \l+ classData : java404util404ArrayList \l+ classData : java404util404ArrayList \l|+ init() : void\l+ printInformation() : void\l printFields() : void\l printMethods() : void\l printCodeTypes() : void\l printConnections() : void\l+ getClassDecl() : problem404asm404ClassDeclarationVisitor\lproblem404asm404ClassDeclarationVisitor\l}"
 ];
-headfirst404iterator404dinermergercafe404MenuTestDrive -> "headfirst404iterator404dinermergercafe404PancakeHouseMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404MenuTestDrive -> "headfirst404iterator404dinermergercafe404DinerMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404MenuTestDrive -> "headfirst404iterator404dinermergercafe404CafeMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404MenuTestDrive -> "headfirst404iterator404dinermergercafe404Waitress"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404PancakeHouseMenu[
+problem404asm404ClassDataContainer -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="dashed"
+] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDataContainer -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor[
 shape="record", 
-label = " {\<\<Leaf\>\> \l \<\<Composite\>\> \l headfirst404iterator404dinermergercafe404PancakeHouseMenu |  menuItems : java404util404ArrayList \l menuItems : java404util404ArrayList \l menuItems : java404util404ArrayList \l|+ init() : void\l+ addItem() : void\l+ getMenuItems() : java404util404ArrayList\l+ createIterator() : java404util404Iterator\ljava404util404ArrayList\l}"
- style=filled, fillcolor=yellow  style=filled, fillcolor=yellow ];
-headfirst404iterator404dinermergercafe404PancakeHouseMenu -> headfirst404iterator404dinermergercafe404Menu[arrowhead="onormal", style="dashed"] 
-headfirst404iterator404dinermergercafe404PancakeHouseMenu -> "headfirst404iterator404dinermergercafe404PancakeHouseMenu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404Waitress[
+label = " {\<\<Decorator\>\> \l problem404asm404ClassDeclarationVisitor | + access : int \l+ nameGlobal : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ implementers : java404util404ArrayList \l+ extendNameGlobal : java404lang404String \l+ implementerNameGlobal : java404lang404String \l+ isInterface : boolean \l+ OPS : int \l+ isSingleton : boolean \l+ className : java404lang404String \l+ patternMap : java404util404HashMap \l+ patternContainer : java404util404ArrayList \l+ argTypesInClass : java404util404ArrayList \l+ methoddatas : java404util404ArrayList \l+ version : int \l+ name : java404lang404String \l+ superName : java404lang404String \l+ interfaces : java404lang404String[] \l+ access : int \l+ nameGlobal : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ implementers : java404util404ArrayList \l+ extendNameGlobal : java404lang404String \l+ implementerNameGlobal : java404lang404String \l+ isInterface : boolean \l+ OPS : int \l+ isSingleton : boolean \l+ className : java404lang404String \l+ patternMap : java404util404HashMap \l+ patternContainer : java404util404ArrayList \l+ argTypesInClass : java404util404ArrayList \l+ methoddatas : java404util404ArrayList \l+ version : int \l+ name : java404lang404String \l+ superName : java404lang404String \l+ interfaces : java404lang404String[] \l+ interfaces : java404lang404String[] \l|+ init() : void\l+ init() : void\l+ init() : void\l+ visit() : void\l+ getImplementedNameList() : int\l+ getImplementedItems() : java404util404ArrayList\l+ isInterface() : boolean\l+ isSingleton() : boolean\l+ setSingleton() : void\l+ getGlobalClassname() : java404lang404String\l+ addPattern() : void\l+ printDesignPatterns() : void\l+ printCodeTypes() : void\l+ printRelationShipTypes() : void\l+ printRelationShipArrowNames() : void\l+ addArgTypesInClass() : void\l+ getArgTypesInClass() : java404util404ArrayList\l+ getImplementers() : java404util404ArrayList\l+ addMethodDatas() : void\l+ getMethodDatas() : java404util404ArrayList\l+ getExtendedName() : java404lang404String\ljava404lang404String\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassDeclarationVisitor -> "problem404asm404SingletonPattern"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassAdaptee"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassAdapter"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassComponent"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassDecoratorNoArrow"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassDecoratorWithArrow"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassLeaf"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor[
 shape="record", 
-label = " {headfirst404iterator404dinermergercafe404Waitress |  pancakeHouseMenu : headfirst404iterator404dinermergercafe404Menu \l dinerMenu : headfirst404iterator404dinermergercafe404Menu \l cafeMenu : headfirst404iterator404dinermergercafe404Menu \l pancakeHouseMenu : headfirst404iterator404dinermergercafe404Menu \l dinerMenu : headfirst404iterator404dinermergercafe404Menu \l cafeMenu : headfirst404iterator404dinermergercafe404Menu \l cafeMenu : headfirst404iterator404dinermergercafe404Menu \l|+ init() : void\l+ printMenu() : void\l printMenu() : void\l+ printVegetarianMenu() : void\l+ isItemVegetarian() : boolean\l printVegetarianMenu() : void\l isVegetarian() : boolean\ljava404util404Iterator\l}"
+label = " {\<\<Decorator\>\> \l problem404asm404ClassFieldVisitor | + access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ symbol : java404lang404String \l+ type : java404lang404String \l+ singletonInField : boolean \l+ exceptions : java404lang404String[] \l+ globalClassName : java404lang404String \l+ fields : java404util404ArrayList \l+ fieldTypes : java404util404ArrayList \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l+ access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ symbol : java404lang404String \l+ type : java404lang404String \l+ singletonInField : boolean \l+ exceptions : java404lang404String[] \l+ globalClassName : java404lang404String \l+ fields : java404util404ArrayList \l+ fieldTypes : java404util404ArrayList \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l|+ init() : void\l+ init() : void\l+ visitField() : org404objectweb404asm404FieldVisitor\l+ getPrintableLine() : java404util404ArrayList\l+ getFieldTypes() : java404util404ArrayList\l+ setSingletonInField() : void\l+ getSingletonInField() : boolean\l+ setGlobalClassName() : void\l+ getGlobalClassName() : java404lang404String\ljava404lang404String\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor[
+shape="record", 
+label = " {\<\<Decorator\>\> \l problem404asm404ClassMethodVisitor | + access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ methods : java404util404ArrayList \l+ returnTypes : java404util404ArrayList \l+ argumentTypes : java404util404ArrayList \l+ argTypesDec : java404util404ArrayList \l+ singletonInMethod : boolean \l+ fVisitor : problem404asm404ClassFieldVisitor \l+ classDecl : problem404asm404ClassDeclarationVisitor \l+ metData : problem404asm404MethodData \l+ access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ methods : java404util404ArrayList \l+ returnTypes : java404util404ArrayList \l+ argumentTypes : java404util404ArrayList \l+ argTypesDec : java404util404ArrayList \l+ singletonInMethod : boolean \l+ fVisitor : problem404asm404ClassFieldVisitor \l+ classDecl : problem404asm404ClassDeclarationVisitor \l+ metData : problem404asm404MethodData \l+ metData : problem404asm404MethodData \l|+ init() : void\l+ init() : void\l+ getReturnTypes() : java404util404ArrayList\l+ visitMethod() : org404objectweb404asm404MethodVisitor\l+ visitInnerClass() : void\l+ getArgumentTypes() : java404util404ArrayList\l+ printMethods() : void\l+ setSingletonInMethod() : void\l+ getSingletonInMethod() : boolean\lboolean\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404DesignParser[
+shape="record", 
+label = " {problem404asm404DesignParser | + classData : java404util404ArrayList \l+ classData : java404util404ArrayList \l+ classData : java404util404ArrayList \l| clinit() : void\l+ init() : void\l+ main() : void\l+ run() : void\ljava404io404PrintWriter\l}"
 ];
-headfirst404iterator404dinermergercafe404Waitress -> "headfirst404iterator404dinermergercafe404Menu"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404Waitress -> "headfirst404iterator404dinermergercafe404Waitress"[arrowhead="curve", style="solid"] 
-headfirst404iterator404dinermergercafe404AlternatingDinerMenuIterator[
+problem404asm404DesignParser -> "problem404asm404ClassContainer"[arrowhead="curve", style="solid"] 
+problem404asm404DesignParser -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404DesignParser -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404DesignParser -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404DesignParser -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404SingletonClassForGettingNames[
 shape="record", 
-label = " {\<\<Leaf\>\> \l headfirst404iterator404dinermergercafe404AlternatingDinerMenuIterator |  items : headfirst404iterator404dinermergercafe404MenuItem[] \l position : int \l items : headfirst404iterator404dinermergercafe404MenuItem[] \l position : int \l position : int \l|+ init() : void\l+ next() : java404lang404Object\l+ hasNext() : boolean\l+ remove() : void\ljava404lang404UnsupportedOperationException\l}"
- style=filled, fillcolor=yellow ];
+label = " {\<\<Singleton\>\> \l problem404asm404SingletonClassForGettingNames | + stuff : problem404asm404SingletonClassForGettingNames \l+ stuff : problem404asm404SingletonClassForGettingNames \l+ stuff : problem404asm404SingletonClassForGettingNames \l| init() : void\l+ namesofstuff() : problem404asm404SingletonClassForGettingNames\lproblem404asm404SingletonClassForGettingNames\l}"
+ color = blue ];
+problem404asm404SingletonClassForGettingNames -> "problem404asm404SingletonClassForGettingNames"[arrowhead="curve", style="dashed"
+] 
+problem404asm404SingletonClassForGettingNames -> "problem404asm404SingletonClassForGettingNames"[arrowhead="curve", style="solid"] 
+problem404asm404SingletonPattern[
+shape="record", 
+label = " {problem404asm404SingletonPattern | + init() : void\l+ printRelationship() : void\l+ printRelationshipType() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassAdaptee[
+shape="record", 
+label = " {problem404asm404ClassAdaptee | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassAdapter[
+shape="record", 
+label = " {problem404asm404ClassAdapter | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassContainer[
+shape="record", 
+label = " {problem404asm404ClassContainer | + classDataContainers : java404util404ArrayList \l+ classData : java404util404ArrayList \l+ classNamesToExtensions : java404util404HashMap \l+ classNamesToImplementers : java404util404HashMap \l+ patterns : java404util404HashMap \l+ classDataContainers : java404util404ArrayList \l+ classData : java404util404ArrayList \l+ classNamesToExtensions : java404util404HashMap \l+ classNamesToImplementers : java404util404HashMap \l+ patterns : java404util404HashMap \l+ patterns : java404util404HashMap \l|+ init() : void\l+ addClassDataContainer() : void\l+ runClassContainer() : void\l lookForPatterns() : void\l lookForAdapters() : void\l lookForDecorators() : void\l lookForComposites() : void\ljava404util404ArrayList\l}"
+];
+problem404asm404ClassContainer -> "problem404asm404ClassAdapterPatternCheck"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassDecoratorPatternCheck"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassCompositePatternCheck"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassPatternsToLookFor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassContainer -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassComponent[
+shape="record", 
+label = " {problem404asm404ClassComponent | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassDecoratorNoArrow[
+shape="record", 
+label = " {problem404asm404ClassDecoratorNoArrow | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassDecoratorWithArrow[
+shape="record", 
+label = " {problem404asm404ClassDecoratorWithArrow | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassDecoratorPatternCheck[
+shape="record", 
+label = " {problem404asm404ClassDecoratorPatternCheck | + init() : void\l+ examineForPattern() : void\ljava404util404ArrayList\l}"
+];
+problem404asm404ClassDecoratorPatternCheck -> problem404asm404ClassPatternsToLookFor[arrowhead="onormal", style="dashed"] 
+problem404asm404ClassDecoratorPatternCheck -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDecoratorPatternCheck -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassLeaf[
+shape="record", 
+label = " {problem404asm404ClassLeaf | + init() : void\l+ printRelationshipType() : void\l+ printRelationship() : void\l+ printRelationShipArrowNames() : void\ljava404io404PrintWriter\l}"
+];
+problem404asm404ClassCompositePatternCheck[
+shape="record", 
+label = " {\<\<Adapter\>\> \l problem404asm404ClassCompositePatternCheck |  possibleComponents : java404util404ArrayList \l possibleComponents : java404util404ArrayList \l possibleComponents : java404util404ArrayList \l|+ init() : void\l+ examineForPattern() : void\ljava404util404ArrayList\l}"
+ style=filled, fillcolor=purple ];
+problem404asm404ClassCompositePatternCheck -> problem404asm404ClassPatternsToLookFor[arrowhead="onormal", style="dashed"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassAdapterPatternCheck[
+shape="record", 
+label = " {problem404asm404ClassAdapterPatternCheck | + init() : void\l+ examineForPattern() : void\ljava404util404ArrayList\l}"
+];
+problem404asm404ClassAdapterPatternCheck -> problem404asm404ClassPatternsToLookFor[arrowhead="onormal", style="dashed"] 
+problem404asm404ClassAdapterPatternCheck -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassAdapterPatternCheck -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassAdapterPatternCheck -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassPatternsToLookFor[
+shape="record", 
+label = " {\<\<Interface\>\> \l\<\<Target\>\> \l problem404asm404ClassPatternsToLookFor | + examineForPattern() : void\lvoid\l}"
+ style=filled, fillcolor=purple ];
 }

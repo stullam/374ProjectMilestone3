@@ -27,8 +27,15 @@ public class DesignParser {
 		outputStream.println("rankdir=BT;");
 		
 		for(String className: args) {
-			System.out.println("random crap: " + className);
-			ClassReader reader = new ClassReader(className);
+			//System.out.println("random crap: " + className);
+			ClassReader reader = null;
+			try {
+				reader = new ClassReader(className);
+			}
+			catch (Exception e) {
+				throw new RuntimeException("class trying to read: " + className, e);
+			}
+			//ClassReader reader = new ClassReader(className);
 
 			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,className);
 			ClassInheritanceArrow inheritanceArrow = new ClassInheritanceArrow(Opcodes.ASM5, declVisitor, args);

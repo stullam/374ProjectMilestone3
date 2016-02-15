@@ -2,15 +2,19 @@ package problem.asm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ClassContainer {
 	public ArrayList<ClassDataContainer> classDataContainers = new ArrayList<ClassDataContainer>();
 	public ArrayList<ClassDataContainer> classData = new ArrayList<ClassDataContainer>();
 	public HashMap<String, String> classNamesToExtensions = new HashMap<String, String>();
 	public HashMap<String, ArrayList<String>> classNamesToImplementers = new HashMap<String, ArrayList<String>>();
+	public HashMap<String, ClassPatternsToLookFor> patterns = new HashMap<String, ClassPatternsToLookFor>();
 
 	public ClassContainer() {
-		// Do nothing
+		patterns.put("Adapt", new ClassAdapterPatternCheck());
+		patterns.put("Dec", new ClassDecoratorPatternCheck());
+		patterns.put("Comp", new ClassCompositePatternCheck());
 	}
 
 	public void addClassDataContainer(ClassDataContainer classDC) {
@@ -22,19 +26,25 @@ public class ClassContainer {
 		//System.out.println("Holy crap we made it here for the entire time of the thingy");
 		for (int b = 0; b < this.classData.size(); b++) {
 			ClassDataContainer currentClass = this.classData.get(b);
-
 			classNamesToImplementers.put(currentClass.className, currentClass.getClassDecl().getImplementers());
-
 			classNamesToExtensions.put(currentClass.className, currentClass.getClassDecl().extendNameGlobal);
-			// //System.out.println("CurrentClassName: " +
-			// currentClass.className);
-			// //System.out.println("CurrentClassNameExtension: " +
-			// currentClass.getClassDecl().extendNameGlobal);
 		}
-		//System.out.println("I am currently looking for particular things but I am not really sure");
-		lookForDecorators();
-		lookForAdapters();
-		lookForComposites();
+		//lookForDecorators();
+		//lookForAdapters();
+		//lookForComposites();
+		lookForPatterns();
+	}
+
+	private void lookForPatterns() {
+		// TODO Auto-generated method stub
+		Set<String> patternsKeys = patterns.keySet();
+		Object[] patternsPossible = patternsKeys.toArray();
+		
+		for(int i = 0; i < patternsKeys.size(); i++){
+			System.out.println("key value: ");
+			patterns.get(patternsPossible[i]).examineForPattern(classData, 
+					classDataContainers, classNamesToExtensions);
+		}
 	}
 
 	private void lookForAdapters() {

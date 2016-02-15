@@ -39,6 +39,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		this.classDecl = classD;
 	}
 	
+	public ArrayList<String> getReturnTypes() {
+		return this.returnTypes;
+	}
+	
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc,
 			String signature, String[] exceptions) {
@@ -102,6 +106,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 					//if(returnType.equals(this.dec))
 				}
 				argumentTypes.add(returnType);
+				returnTypes.add(returnType);
 			}
 		}
 		
