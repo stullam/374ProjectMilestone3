@@ -4,8 +4,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -20,8 +28,10 @@ import javax.swing.JPanel;
 	    	 try {
 	    		  FileInputStream f = new FileInputStream(imagePath);
 		          image = ImageIO.read(f);
+		          
+
 		       } catch (IOException ex) {
-		            // handle exception...
+		            System.out.println("IMAGE ERROR!!");
 		       }
 		    }
 	    
@@ -44,6 +54,7 @@ import javax.swing.JPanel;
 	        g.dispose();
 	        return dimg;  
 	    } 
+	    
 
 	    @Override
 	    protected void paintComponent(Graphics g) {
