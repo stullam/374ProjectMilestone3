@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import problem.asm.DesignParser;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,8 +26,8 @@ public class ConfigGUI
 		JPanel panel2 = new JPanel();
 		JLabel label = new JLabel("Classes to be Converted");
 		JLabel label2 = new JLabel("Location of GraphViz Dot Command");
-		JTextField field1 = new JTextField(30);
-		JTextField field2 = new JTextField(30);
+		JTextField field1 = new JTextField(100);
+		JTextField field2 = new JTextField(100);
 		panel1.add(label);
 		panel1.add(field1);
 		panel2.add(label2);
@@ -32,9 +35,13 @@ public class ConfigGUI
 		JButton config = new JButton("Configure");
 		config.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	     		AppGUI gui = new AppGUI();
 	     		try {
-					gui.prepareGUI(field1.getText(),field2.getText());
+					DesignParser parser = new DesignParser();
+					parser.run(field1.getText());
+					GraphVizImageConverter converter = new GraphVizImageConverter(field2.getText());
+					converter.convertGraphVizText("myGraph","TESTCODE.txt");
+					AppGUI gui = new AppGUI();
+					gui.prepareGUI();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
