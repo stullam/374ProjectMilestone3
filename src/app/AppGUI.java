@@ -55,7 +55,7 @@ public class AppGUI {
 					
 				}
 				
-			}
+			
 			for(int j=0; j< boxes.size(); j++)
 			{
 				buttonPanel.add(boxes.get(j));
