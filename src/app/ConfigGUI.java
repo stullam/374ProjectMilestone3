@@ -55,7 +55,7 @@ public class ConfigGUI
 					parser.run(field1.getText());
 					GraphVizImageConverter converter = new GraphVizImageConverter(field2.getText());
 					converter.convertGraphVizText("myGraph","TESTCODE.txt");
-					AppGUI gui = new AppGUI();
+					AppGUI gui = new AppGUI(field1.getText(), field2.getText(), field4.getText());
 					gui.prepareGUI(field2.getText(),  field5.getText());
 
 			        if(!(field4.getText().equals("")))

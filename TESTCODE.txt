@@ -1,7 +1,47 @@
 digraph Stankfile{
 rankdir=BT;
-app404App[
+problem404asm404ClassDeclarationVisitor[
 shape="record", 
-label = " {app404App | + init() : void\l+ main() : void\lapp404ConfigGUI\l}"
-];
+label = " {\<\<Decorator\>\> \l problem404asm404ClassDeclarationVisitor | + access : int \l+ nameGlobal : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ implementers : java404util404ArrayList \l+ extendNameGlobal : java404lang404String \l+ implementerNameGlobal : java404lang404String \l+ isInterface : boolean \l+ OPS : int \l+ isSingleton : boolean \l+ className : java404lang404String \l+ patternMap : java404util404HashMap \l+ patternContainer : java404util404ArrayList \l+ argTypesInClass : java404util404ArrayList \l+ methoddatas : java404util404ArrayList \l+ version : int \l+ name : java404lang404String \l+ superName : java404lang404String \l+ interfaces : java404lang404String[] \l+ access : int \l+ nameGlobal : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ implementers : java404util404ArrayList \l+ extendNameGlobal : java404lang404String \l+ implementerNameGlobal : java404lang404String \l+ isInterface : boolean \l+ OPS : int \l+ isSingleton : boolean \l+ className : java404lang404String \l+ patternMap : java404util404HashMap \l+ patternContainer : java404util404ArrayList \l+ argTypesInClass : java404util404ArrayList \l+ methoddatas : java404util404ArrayList \l+ version : int \l+ name : java404lang404String \l+ superName : java404lang404String \l+ interfaces : java404lang404String[] \l+ interfaces : java404lang404String[] \l|+ init() : void\l+ init() : void\l+ init() : void\l+ init() : void\l+ visit() : void\l+ getImplementedNameList() : int\l+ getImplementedItems() : java404util404ArrayList\l+ isInterface() : boolean\l+ isSingleton() : boolean\l+ setSingleton() : void\l+ getGlobalClassname() : java404lang404String\l+ addPattern() : void\l+ getPatterns() : java404util404ArrayList\l+ printDesignPatterns() : void\l+ printCodeTypes() : void\l+ printRelationShipTypes() : void\l+ printRelationShipArrowNames() : void\l+ addArgTypesInClass() : void\l+ getArgTypesInClass() : java404util404ArrayList\l+ getImplementers() : java404util404ArrayList\l+ addMethodDatas() : void\l+ getMethodDatas() : java404util404ArrayList\l+ getExtendedName() : java404lang404String\ljava404lang404String\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassDeclarationVisitor -> "problem404asm404SingletonPattern"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassAdaptee"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassAdapter"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassComponent"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassDecoratorNoArrow"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassDecoratorWithArrow"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassLeaf"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassDeclarationVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor[
+shape="record", 
+label = " {\<\<Decorator\>\> \l problem404asm404ClassFieldVisitor | + access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ symbol : java404lang404String \l+ type : java404lang404String \l+ singletonInField : boolean \l+ exceptions : java404lang404String[] \l+ globalClassName : java404lang404String \l+ fields : java404util404ArrayList \l+ fieldTypes : java404util404ArrayList \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l+ access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ symbol : java404lang404String \l+ type : java404lang404String \l+ singletonInField : boolean \l+ exceptions : java404lang404String[] \l+ globalClassName : java404lang404String \l+ fields : java404util404ArrayList \l+ fieldTypes : java404util404ArrayList \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l+ classDeclaration : problem404asm404ClassDeclarationVisitor \l|+ init() : void\l+ init() : void\l+ visitField() : org404objectweb404asm404FieldVisitor\l+ getPrintableLine() : java404util404ArrayList\l+ getFieldTypes() : java404util404ArrayList\l+ setSingletonInField() : void\l+ getSingletonInField() : boolean\l+ setGlobalClassName() : void\l+ getGlobalClassName() : java404lang404String\ljava404lang404String\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassFieldVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor[
+shape="record", 
+label = " {\<\<Decorator\>\> \l problem404asm404ClassMethodVisitor | + access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ methods : java404util404ArrayList \l+ returnTypes : java404util404ArrayList \l+ argumentTypes : java404util404ArrayList \l+ argTypesDec : java404util404ArrayList \l+ singletonInMethod : boolean \l+ fVisitor : problem404asm404ClassFieldVisitor \l+ classDecl : problem404asm404ClassDeclarationVisitor \l+ metData : problem404asm404MethodData \l+ access : int \l+ name : java404lang404String \l+ desc : java404lang404String \l+ signature : java404lang404String \l+ exceptions : java404lang404String[] \l+ methods : java404util404ArrayList \l+ returnTypes : java404util404ArrayList \l+ argumentTypes : java404util404ArrayList \l+ argTypesDec : java404util404ArrayList \l+ singletonInMethod : boolean \l+ fVisitor : problem404asm404ClassFieldVisitor \l+ classDecl : problem404asm404ClassDeclarationVisitor \l+ metData : problem404asm404MethodData \l+ metData : problem404asm404MethodData \l|+ init() : void\l+ init() : void\l+ getReturnTypes() : java404util404ArrayList\l+ visitMethod() : org404objectweb404asm404MethodVisitor\l+ visitInnerClass() : void\l+ getArgumentTypes() : java404util404ArrayList\l+ printMethods() : void\l+ setSingletonInMethod() : void\l+ getSingletonInMethod() : boolean\lboolean\l}"
+ style=filled, fillcolor=green ];
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassFieldVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassMethodVisitor -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404SingletonClassForGettingNames[
+shape="record", 
+label = " {\<\<Singleton\>\> \l problem404asm404SingletonClassForGettingNames | + stuff : problem404asm404SingletonClassForGettingNames \l+ stuff : problem404asm404SingletonClassForGettingNames \l+ stuff : problem404asm404SingletonClassForGettingNames \l| init() : void\l+ namesofstuff() : problem404asm404SingletonClassForGettingNames\lproblem404asm404SingletonClassForGettingNames\l}"
+ color = blue ];
+problem404asm404SingletonClassForGettingNames -> "problem404asm404SingletonClassForGettingNames"[arrowhead="curve", style="dashed"
+] 
+problem404asm404SingletonClassForGettingNames -> "problem404asm404SingletonClassForGettingNames"[arrowhead="curve", style="solid"] 
+problem404asm404ClassCompositePatternCheck[
+shape="record", 
+label = " {\<\<Adapter\>\> \l problem404asm404ClassCompositePatternCheck |  possibleComponents : java404util404ArrayList \l possibleComponents : java404util404ArrayList \l possibleComponents : java404util404ArrayList \l|+ init() : void\l+ examineForPattern() : void\ljava404util404ArrayList\l}"
+ style=filled, fillcolor=purple ];
+problem404asm404ClassCompositePatternCheck -> problem404asm404ClassPatternsToLookFor[arrowhead="onormal", style="dashed"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassDataContainer"[arrowhead="curve", style="solid"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassDeclarationVisitor"[arrowhead="curve", style="solid"] 
+problem404asm404ClassCompositePatternCheck -> "problem404asm404ClassMethodVisitor"[arrowhead="curve", style="solid"] 
 }

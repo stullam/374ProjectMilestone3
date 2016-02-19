@@ -35,6 +35,20 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	//String signature; 
 	String superName;
 	String[] interfaces;
+	
+	public ClassDeclarationVisitor() {
+		super(327680);
+		patternMap.put("Singleton", new SingletonPattern());
+		patternMap.put("Adaptee", new ClassAdaptee());
+		patternMap.put("Adapter", new ClassAdapter());
+		patternMap.put("Component", new ClassComponent());
+		patternMap.put("NoArrow", new ClassDecoratorNoArrow());
+		patternMap.put("WithArrow", new ClassDecoratorWithArrow());
+		patternMap.put("Target", new ClassTarget());
+		patternMap.put("Leaf", new ClassLeaf());
+		patternMap.put("CompositeComponent", new ClassCompositeComponent());
+		patternMap.put("Composite", new ClassComposite());
+	}
 
 	public ClassDeclarationVisitor(int arg0) {
 		super(arg0);
@@ -48,6 +62,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	
 	public ClassDeclarationVisitor(int asm5, String className) {
 		super(asm5);
+		System.out.println("asm: " + asm5);
 		className = className.replace(".", "404");
 		this.nameGlobal = className;
 		this.OPS = asm5;
@@ -116,6 +131,10 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		if(!this.patternContainer.contains(pattern)) {
 			this.patternContainer.add(pattern);
 		}
+	}
+	
+	public ArrayList<String> getPatterns(){
+		return this.patternContainer;
 	}
 	
 	public void printDesignPatterns(PrintWriter outputstream) {
