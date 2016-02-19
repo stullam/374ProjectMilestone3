@@ -10,6 +10,45 @@ import org.objectweb.asm.Type;
 public class ClassMethodLineVisitor extends MethodVisitor{
 	public String lineReturnType = "";
 	public String owner = "";
+	public String getSupersShortCutName() {
+		return supersShortCutName;
+	}
+
+	public ArrayList<String> getsShortCutNames() {
+		return sShortCutNames;
+	}
+
+	public ArrayList<String> getInnerReturnTypes() {
+		return innerReturnTypes;
+	}
+
+	public ClassMethodVisitor getMethodVisi() {
+		return MethodVisi;
+	}
+
+	public MethodVisitor getDecorated() {
+		return decorated;
+	}
+
+	public SDEC getGlobalContainer() {
+		return globalContainer;
+	}
+
+	public String getCallerShortName() {
+		return callerShortName;
+	}
+
+	public ClassVisitor getLocFieldV() {
+		return locFieldV;
+	}
+
+	public ClassReader getReader() {
+		return reader;
+	}
+
+	public int getDEPTH() {
+		return DEPTH;
+	}
 	public String name = "";
 	public String supersShortCutName = "blammy";
 	

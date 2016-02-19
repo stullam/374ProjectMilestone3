@@ -6,6 +6,46 @@ import java.util.HashMap;
 
 public class ClassDataContainer {
 	PrintWriter outputStream = null;
+	public PrintWriter getOutputStream() {
+		return outputStream;
+	}
+
+	public ClassDeclarationVisitor getDeclVisitor() {
+		return declVisitor;
+	}
+
+	public ClassFieldVisitor getFieldVisitor() {
+		return fieldVisitor;
+	}
+
+	public ClassMethodVisitor getMethodVisitor() {
+		return methodVisitor;
+	}
+
+	public ClassInheritanceArrow getInheritanceArrow() {
+		return inheritanceArrow;
+	}
+
+	public ClassImplementsArrow getImplementsArrow() {
+		return implementsArrow;
+	}
+
+	public ClassAssociationArrow getAssociationArrow() {
+		return associationArrow;
+	}
+
+	public ClassUsesArrow getUsesArrow() {
+		return usesArrow;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public static ArrayList<ClassDataContainer> getClassData() {
+		return classData;
+	}
+
 	ClassDeclarationVisitor declVisitor = null;
 	ClassFieldVisitor fieldVisitor = null;
 	ClassMethodVisitor methodVisitor= null;

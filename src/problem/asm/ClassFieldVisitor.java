@@ -11,6 +11,41 @@ public class ClassFieldVisitor extends ClassVisitor {
 	
 	public int access;
 	public String name;
+	public int getAccess() {
+		return access;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String[] getExceptions() {
+		return exceptions;
+	}
+
+	public ArrayList<String> getFields() {
+		return fields;
+	}
+
+	public ClassDeclarationVisitor getClassDeclaration() {
+		return classDeclaration;
+	}
 	public String desc;
 	public String signature;
 	public String symbol = "";

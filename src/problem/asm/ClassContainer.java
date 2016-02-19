@@ -6,6 +6,46 @@ import java.util.Set;
 
 public class ClassContainer {
 	public ArrayList<ClassDataContainer> classDataContainers = new ArrayList<ClassDataContainer>();
+	public ArrayList<ClassDataContainer> getClassDataContainers() {
+		return classDataContainers;
+	}
+
+	public void setClassDataContainers(ArrayList<ClassDataContainer> classDataContainers) {
+		this.classDataContainers = classDataContainers;
+	}
+
+	public ArrayList<ClassDataContainer> getClassData() {
+		return classData;
+	}
+
+	public void setClassData(ArrayList<ClassDataContainer> classData) {
+		this.classData = classData;
+	}
+
+	public HashMap<String, String> getClassNamesToExtensions() {
+		return classNamesToExtensions;
+	}
+
+	public void setClassNamesToExtensions(HashMap<String, String> classNamesToExtensions) {
+		this.classNamesToExtensions = classNamesToExtensions;
+	}
+
+	public HashMap<String, ArrayList<String>> getClassNamesToImplementers() {
+		return classNamesToImplementers;
+	}
+
+	public void setClassNamesToImplementers(HashMap<String, ArrayList<String>> classNamesToImplementers) {
+		this.classNamesToImplementers = classNamesToImplementers;
+	}
+
+	public HashMap<String, ClassPatternsToLookFor> getPatterns() {
+		return patterns;
+	}
+
+	public void setPatterns(HashMap<String, ClassPatternsToLookFor> patterns) {
+		this.patterns = patterns;
+	}
+
 	public ArrayList<ClassDataContainer> classData = new ArrayList<ClassDataContainer>();
 	public HashMap<String, String> classNamesToExtensions = new HashMap<String, String>();
 	public HashMap<String, ArrayList<String>> classNamesToImplementers = new HashMap<String, ArrayList<String>>();

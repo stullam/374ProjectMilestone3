@@ -12,6 +12,70 @@ import org.objectweb.asm.Type;
 public class ClassDeclarationVisitor extends ClassVisitor {
 	
 	public int access;
+	public int getAccess() {
+		return access;
+	}
+
+	public String getNameGlobal() {
+		return nameGlobal;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public String[] getExceptions() {
+		return exceptions;
+	}
+
+	public String getExtendNameGlobal() {
+		return extendNameGlobal;
+	}
+
+	public String getImplementerNameGlobal() {
+		return implementerNameGlobal;
+	}
+
+	public int getOPS() {
+		return OPS;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public HashMap<String, PatternIdentifierInterface> getPatternMap() {
+		return patternMap;
+	}
+
+	public ArrayList<String> getPatternContainer() {
+		return patternContainer;
+	}
+
+	public ArrayList<MethodData> getMethoddatas() {
+		return methoddatas;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getSuperName() {
+		return superName;
+	}
+
+	public String[] getInterfaces() {
+		return interfaces;
+	}
+
 	public String nameGlobal;
 	public String desc;
 	public String signature;

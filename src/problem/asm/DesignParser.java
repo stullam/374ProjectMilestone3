@@ -14,6 +14,10 @@ public class DesignParser {
 	public DesignParser() throws IOException {
 	}
 
+	public static ArrayList<ClassDataContainer> getClassData() {
+		return classData;
+	}
+
 	public static void main(String[] args) throws IOException {
 		ClassContainer classC = new ClassContainer();
 

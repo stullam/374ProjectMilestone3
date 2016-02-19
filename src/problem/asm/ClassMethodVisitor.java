@@ -16,6 +16,45 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public String name;
 	public String desc;
 	public String signature;
+	public int getAccess() {
+		return access;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public String[] getExceptions() {
+		return exceptions;
+	}
+
+	public ArrayList<String> getMethods() {
+		return methods;
+	}
+
+	public ArrayList<String> getArgTypesDec() {
+		return argTypesDec;
+	}
+
+	public ClassFieldVisitor getfVisitor() {
+		return fVisitor;
+	}
+
+	public ClassDeclarationVisitor getClassDecl() {
+		return classDecl;
+	}
+
+	public MethodData getMetData() {
+		return metData;
+	}
 	public String[] exceptions;
 	public ArrayList<String> methods = new ArrayList<String>();
 	public ArrayList<String> returnTypes = new ArrayList<String>();
